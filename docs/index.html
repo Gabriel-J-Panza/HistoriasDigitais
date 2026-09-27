@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15100c">
+  <meta name="description" content="Crônicas de Aurelia — histórias expandidas, personagens e cidades do reino.">
+  <title>Crônicas de Aurelia</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23d7b36a' d='M32 3 51 14v23L32 61 13 37V14z'/%3E%3Cpath fill='%2315100c' d='m32 12 10 34-10-7-10 7z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <header class="site-header">
+    <button class="home-button" id="homeButton" type="button" aria-label="Voltar ao mapa de Aurelia">
+      <span aria-hidden="true">←</span><span>Mapa de Aurelia</span>
+    </button>
+    <a class="wordmark" href="#/" aria-label="Crônicas de Aurelia — início">
+      <span class="wordmark-kicker">Crônicas de</span>
+      <strong>Aurelia</strong>
+    </a>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <section class="map-view" id="mapView" aria-labelledby="mapTitle">
+      <div class="map-intro">
+        <p class="eyebrow">Um reino, muitas cicatrizes</p>
+        <h1 id="mapTitle">Escolha uma cidade no mapa</h1>
+        <p>Entre pelas fronteiras de Aurelia e acompanhe cada saga em uma versão contínua, textual e organizada em capítulos.</p>
+      </div>
+      <div class="map-frame">
+        <img src="assets/aurelia-map.png" alt="Mapa ilustrado do Reino de Aurelia com oito cidades" width="1728" height="2472">
+        <nav class="city-markers" aria-label="Cidades de Aurelia">
+          <a class="marker marker--eldor" href="#/cidade/eldor" data-city="eldor"><span>Eldor</span></a>
+          <a class="marker marker--celestria" href="#/cidade/celestria" data-city="celestria"><span>Celestria</span></a>
+          <a class="marker marker--glacius" href="#/cidade/glacius" data-city="glacius"><span>Glacius</span></a>
+          <a class="marker marker--sylvaris" href="#/cidade/sylvaris" data-city="sylvaris"><span>Sylvaris</span></a>
+          <a class="marker marker--ghasthys" href="#/cidade/ghasthys" data-city="ghasthys"><span>Ghasthys</span></a>
+          <a class="marker marker--dustcreek" href="#/cidade/dustcreek" data-city="dustcreek"><span>DuskCreek</span></a>
+          <a class="marker marker--califa" href="#/cidade/califa" data-city="califa"><span>Califa</span></a>
+          <a class="marker marker--dustywood" href="#/cidade/dustywood" data-city="dustywood"><span>DustyWood</span></a>
+        </nav>
+      </div>
+      <div class="map-legend" aria-label="Lista de cidades" id="mapLegend"></div>
+    </section>
+
+    <section class="city-view" id="cityView" hidden>
+      <div class="city-masthead" id="cityMasthead">
+        <div class="city-masthead__content">
+          <p class="eyebrow" id="cityRegion"></p>
+          <h1 id="cityName"></h1>
+          <p class="city-lead" id="cityLead"></p>
+          <dl class="city-facts" id="cityFacts"></dl>
+        </div>
+      </div>
+
+      <nav class="city-tabs" aria-label="Conteúdo da cidade" role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="panel-historias" id="tab-historias" data-tab="historias">Histórias</button>
+        <button role="tab" aria-selected="false" aria-controls="panel-herois" id="tab-herois" data-tab="herois">Heróis</button>
+        <button role="tab" aria-selected="false" aria-controls="panel-npcs" id="tab-npcs" data-tab="npcs">Habitantes e aliados</button>
+      </nav>
+
+      <div class="city-content" id="cityContent">
+        <aside class="chapter-nav" id="chapterNav" aria-label="Navegação dos capítulos"></aside>
+        <div class="tab-panel" id="panel-historias" role="tabpanel" aria-labelledby="tab-historias"></div>
+        <div class="tab-panel people-grid" id="panel-herois" role="tabpanel" aria-labelledby="tab-herois" hidden></div>
+        <div class="tab-panel people-grid" id="panel-npcs" role="tabpanel" aria-labelledby="tab-npcs" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Crônicas de Aurelia · histórias de Gabriel J. Panza</p>
+  </footer>
+  <script src="assets/stories.js"></script>
+  <script src="assets/expansions.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
