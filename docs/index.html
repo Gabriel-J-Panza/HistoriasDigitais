@@ -35,14 +35,16 @@
         <div class="book-page book-page--map">
         <img src="assets/aurelia-map.png" alt="Mapa ilustrado do Reino de Aurelia com oito cidades" width="1728" height="1808">
         <nav class="city-markers" aria-label="Cidades de Aurelia">
-          <a class="marker marker--eldor" href="#/cidade/eldor" data-city="eldor"><span>Eldor</span></a>
-          <a class="marker marker--celestria" href="#/cidade/celestria" data-city="celestria"><span>Celestria</span></a>
-          <a class="marker marker--glacius" href="#/cidade/glacius" data-city="glacius"><span>Glacius</span></a>
-          <a class="marker marker--sylvaris" href="#/cidade/sylvaris" data-city="sylvaris"><span>Sylvaris</span></a>
-          <a class="marker marker--ghasthys" href="#/cidade/ghasthys" data-city="ghasthys"><span>Ghasthys</span></a>
-          <a class="marker marker--dustcreek" href="#/cidade/dustcreek" data-city="dustcreek"><span>DuskCreek</span></a>
-          <a class="marker marker--califa" href="#/cidade/califa" data-city="califa"><span>Califa</span></a>
-          <a class="marker marker--dustywood" href="#/cidade/dustywood" data-city="dustywood"><span>DustyWood</span></a>
+          <svg class="city-map-overlay" viewBox="0 0 1728 1808" preserveAspectRatio="none" aria-hidden="false">
+            <a href="#/cidade/eldor" data-city="eldor" aria-label="Eldor"><path d="M795 190 L1125 405 L1038 641 L605 692 L560 408 Z" /></a>
+            <a href="#/cidade/celestria" data-city="celestria" aria-label="Celestria"><path d="M1305 214 L1450 230 L1570 603 L1206 640 L1125 338 Z" /></a>
+            <a href="#/cidade/glacius" data-city="glacius" aria-label="Glacius"><ellipse cx="342" cy="911" rx="158" ry="157" /></a>
+            <a href="#/cidade/sylvaris" data-city="sylvaris" aria-label="Sylvaris"><ellipse cx="1459" cy="831" rx="208" ry="202" /></a>
+            <a class="city-map-overlay__ghasthys" href="#/cidade/ghasthys" data-city="ghasthys" aria-label="Ghasthys"><ellipse cx="965" cy="875" rx="300" ry="213" transform="rotate(-18 965 875)" /></a>
+            <a href="#/cidade/dustcreek" data-city="dustcreek" aria-label="DustCreek"><path d="M1450 1055 L1670 1055 L1640 1365 L1520 1365 L1400 1365 L1305 1135 Z" /></a>
+            <a href="#/cidade/califa" data-city="califa" aria-label="Califa"><path d="M350 1230 L505 1230 L585 1325 L620 1610 L410 1655 L155 1455 Z" /></a>
+            <a href="#/cidade/dustywood" data-city="dustywood" aria-label="DustyWood"><path d="M760 1330 L1115 1300 L1240 1555 L680 1615 Z" /></a>
+          </svg>
         </nav>
         </div>
         <div class="book-page book-page--future" id="bookFuture" aria-hidden="true">

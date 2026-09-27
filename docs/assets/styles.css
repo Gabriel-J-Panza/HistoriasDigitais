@@ -49,17 +49,21 @@ a { color: inherit; }
 .page-turn:hover, .page-turn:focus-visible { color: #2b1c10; background: #f2d49b; outline: none; }
 .page-hint { position: absolute; z-index: 5; right: 1rem; bottom: -2rem; margin: 0; color: #bbaa95; font: .72rem var(--sans); }
 .city-markers { position: absolute; inset: 0; }
-.marker { --marker: rgba(222, 180, 91, .15); position: absolute; display: grid; place-items: center; aspect-ratio: 1; color: #fff8e7; background: var(--marker); border: 2px solid rgba(255,234,181,.7); clip-path: polygon(50% 0, 90% 20%, 100% 68%, 74% 100%, 25% 95%, 0 60%, 12% 17%); text-decoration: none; opacity: .28; transform: scale(.88); transition: opacity .2s, transform .2s, filter .2s, background .2s; }
-.marker span { padding: .25rem .55rem; background: rgba(15,10,7,.84); border-radius: 2px; font: 700 clamp(.62rem, 1.1vw, .9rem) var(--sans); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-.marker:hover, .marker:focus-visible { opacity: 1; transform: scale(1.06); filter: drop-shadow(0 0 18px #ffd071); background: rgba(255, 193, 72, .28); outline: none; }
-.marker--eldor { left: 36%; top: 10%; width: 29%; }
-.marker--celestria { left: 65%; top: 11%; width: 25%; }
-.marker--glacius { left: 7%; top: 36%; width: 30%; clip-path: polygon(39% 0, 70% 10%, 96% 40%, 88% 82%, 57% 100%, 22% 88%, 0 56%, 9% 19%); }
-.marker--sylvaris { left: calc(74% + 2px); top: calc(34% + 2px); width: 16%; clip-path: polygon(44% 0, 78% 9%, 100% 42%, 89% 83%, 58% 100%, 20% 88%, 0 54%, 12% 18%); }
-.marker--ghasthys { left: calc(43% + 1px); top: calc(42% - 7px); width: 24%; clip-path: polygon(49% 0, 87% 18%, 100% 59%, 78% 94%, 38% 100%, 7% 78%, 0 38%, 18% 10%); }
-.marker--dustcreek { left: 78%; top: 55%; width: 18%; clip-path: polygon(25% 5%, 78% 0, 100% 34%, 90% 82%, 54% 100%, 6% 78%, 0 38%); }
-.marker--califa { left: 9%; top: 62%; width: 28%; }
-.marker--dustywood { left: 43%; top: 69%; width: 22%; clip-path: polygon(18% 10%, 78% 0, 100% 36%, 88% 86%, 50% 100%, 7% 82%, 0 36%); }
+.city-map-overlay { display: block; width: 100%; height: 100%; overflow: visible; }
+.city-map-overlay a { color: inherit; }
+.city-map-overlay path, .city-map-overlay ellipse { fill: transparent; stroke: transparent; stroke-width: 4; vector-effect: non-scaling-stroke; opacity: 0; cursor: pointer; transition: opacity .2s, fill .2s, filter .2s; }
+.city-map-overlay__ghasthys ellipse { opacity: 0; stroke: transparent; fill: transparent; }
+.city-map-overlay__ghasthys:hover ellipse, .city-map-overlay__ghasthys:focus-visible ellipse { opacity: 1; stroke: rgba(255,234,181,.65); fill: rgba(255,193,72,.3); }
+.city-map-overlay a:hover path, .city-map-overlay a:focus-visible path, .city-map-overlay a:hover ellipse, .city-map-overlay a:focus-visible ellipse { fill: rgba(255,193,72,.3); opacity: 1; filter: drop-shadow(0 0 18px #ffd071); outline: none; }
+.marker--eldor { left: 32.4%; top: 10.5%; width: 28.7%; clip-path: polygon(74% 0, 100% 51%, 62% 100%, 21% 97%, 0 52%); }
+.marker--celestria { left: 58.4%; top: 10.6%; width: 23.3%; clip-path: polygon(61% 0, 100% 4%, 100% 100%, 22% 98%, 0 35%); }
+.marker--glacius { left: 10.5%; top: 37.3%; width: 18.2%; aspect-ratio: 1; border-radius: 50%; clip-path: none; }
+.marker--sylvaris { left: 65.5%; top: 34.7%; width: 24.1%; aspect-ratio: 1.02; border-radius: 50%; clip-path: none; }
+.marker--ghasthys { left: 34.2%; top: 30.8%; width: 34.4%; aspect-ratio: 1.12; border: 0; border-radius: 50%; background: transparent; clip-path: none; opacity: 0; transform: rotate(-18deg) scale(.88); }
+.marker--ghasthys:hover, .marker--ghasthys:focus-visible { opacity: 1; transform: rotate(-18deg) scale(1.06); }
+.marker--dustcreek { left: 65%; top: 49.8%; width: 23.2%; clip-path: polygon(72% 0, 100% 19%, 96% 88%, 30% 100%, 0 43%); }
+.marker--califa { left: 5.8%; top: 62.1%; width: 28%; clip-path: polygon(62% 0, 100% 35%, 94% 88%, 43% 100%, 0 54%); }
+.marker--dustywood { left: 35.2%; top: 64.3%; width: 29.3%; clip-path: polygon(73% 0, 100% 61%, 0 100%, 10% 14%); }
 .map-legend { display: none; }
 
 .city-view { min-height: 100vh; background: var(--paper); }
@@ -141,7 +145,6 @@ footer { padding: 2rem clamp(1rem,4vw,4rem); color: #ae9f8b; background: var(--n
   .book { width: 100%; transform: none; }
   .page-hint { display: none; }
   .page-turn__label { display: none; }
-  .marker span { font-size: .55rem; }
   .city-tabs { top: 66px; justify-content: flex-start; overflow-x: auto; }
   .city-tabs button { white-space: nowrap; padding-inline: .75rem; }
   .city-masthead h1 { font-size: clamp(3.4rem, 19vw, 5.3rem); }
