@@ -76,6 +76,17 @@ const STORY_DECKS = {
   "Além do Véu": "Quatro marcas levam o grupo até uma rachadura no Plano Astral — e talvez não exista caminho simples de volta."
 };
 
+const CHRONICLE_ART = {
+  dustywood: ["assets/chronicles/dustywood.webp", "A rua silenciosa de DustyWood ao pôr do sol, cercada pelo deserto"],
+  eldor: ["assets/chronicles/eldor.webp", "As torres de obsidiana e as pontes iluminadas pelo Aether em Eldor"],
+  ghasthys: ["assets/chronicles/ghasthys.webp", "As ruínas de Ghasthys tomadas por névoa espectral sob a lua"],
+  glacius: ["assets/chronicles/glacius.webp", "O reino gelado de Glacius entre montanhas e cristais distantes"],
+  califa: ["assets/chronicles/califa.webp", "A cidade fortificada de Califa além das dunas e das antigas rotas de Vera Cruz"],
+  celestria: ["assets/chronicles/celestria.webp", "Os campos, o litoral e o palácio de Celestria sob a luz da manhã"],
+  dustcreek: ["assets/chronicles/dustcreek.webp", "DuskCreek junto ao riacho, com Ghost Canyon ao fundo"],
+  sylvaris: ["assets/chronicles/sylvaris.webp", "A cidade viva de Sylvaris construída ao redor da Árvore-Mundo"]
+};
+
 const el = (id) => document.getElementById(id);
 const slug = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const stories = window.AURELIA_STORIES || [];
@@ -106,7 +117,9 @@ function renderCity(id) {
   const article = [];
   const nav = [];
   cityStories.forEach((story, storyIndex) => {
-    article.push(`<header class="story-header"><span class="volume-label">${story.volume} · Crônica ${storyIndex + 1}</span><h2>${story.title}</h2><p class="story-deck">${STORY_DECKS[story.title] || "Uma crônica de Aurelia."}</p></header>`);
+    const [artSrc, artAlt] = CHRONICLE_ART[id] || [];
+    const art = artSrc ? `<figure class="story-illustration"><img src="${artSrc}" alt="${artAlt}" width="1440" height="810" loading="lazy" decoding="async"></figure>` : "";
+    article.push(`<header class="story-header"><span class="volume-label">${story.volume} · Crônica ${storyIndex + 1}</span><h2>${story.title}</h2><p class="story-deck">${STORY_DECKS[story.title] || "Uma crônica de Aurelia."}</p>${art}</header>`);
     story.chapters.forEach((chapter, chapterIndex) => {
       const chapterId = `${slug(story.title)}-${chapterIndex + 1}`;
       nav.push(`<button type="button" data-chapter="${chapterId}">${storyIndex + 1}.${chapterIndex + 1} ${chapter.title}</button>`);
