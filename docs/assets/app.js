@@ -62,18 +62,18 @@ const CITIES = {
 };
 
 const STORY_DECKS = {
-  "Sussurros em DustyWood": "Quando famílias inteiras desaparecem, três aventureiros seguem os ruídos que a cidade tem medo de nomear.",
-  "O Colapso do Aether": "A invenção que prometia transformar magia em progresso ameaça consumir a cidade que a criou.",
-  "A Cidade dos Espectros": "Uma travessia por ruínas onde os mortos não partiram e o passado continua tentando ser ouvido.",
-  "Os Dez Ecos do Dragão": "Dez cristais, dez corrupções e uma jornada pelos fragmentos de um poder adormecido.",
-  "O Trono de Sangue de Califa": "A história das Sete Casas e da queda que apagou o nome de Vera Cruz.",
-  "As Sombras de Celestria": "A fartura do reino encobre uma conspiração alimentada por ambição e magia escarlate.",
-  "A Crônica de DuskCreek": "O segredo de Ghost Canyon rompe a aparência pacífica do povoado.",
-  "O Lamento de Sylvaris": "A Árvore-Mundo adoece, e a cidade inteira sente a corrupção avançar pelas raízes.",
-  "As Cinzas de Vera Cruz": "As Casas retornam para libertar Califa sem reconstruir as injustiças do passado.",
-  "A Coroa e as Correntes": "Um golpe alcança o palácio e transforma as defesas de Celestria em instrumentos de cerco.",
-  "O Preço do Retorno": "Kael encontra DuskCreek ocupada e seus aliados dispersos entre resistência e sobrevivência.",
-  "Além do Véu": "Quatro marcas conduzem Sylvaris por uma cicatriz aberta no Plano Astral."
+  "Sussurros em DustyWood": "Famílias somem durante a noite, e três aventureiros seguem pistas que a cidade preferia manter enterradas.",
+  "O Colapso do Aether": "A grande invenção de Eldor começa a sair do controle — e seus criadores precisam encarar o estrago.",
+  "A Cidade dos Espectros": "Em Ghasthys, os mortos continuam por perto e cada rua parece guardar uma versão diferente do passado.",
+  "Os Dez Ecos do Dragão": "Dez cristais corrompidos, dez lugares perigosos e uma jornada que não perdoa decisões apressadas.",
+  "O Trono de Sangue de Califa": "As Sete Casas tentam retomar Vera Cruz sem repetir a violência que derrubou o antigo reino.",
+  "As Sombras de Celestria": "Por trás das colheitas fartas, uma irmandade compra confiança e prepara um golpe mágico.",
+  "A Crônica de DuskCreek": "O segredo de Ghost Canyon quebra a fachada tranquila do povoado e muda quem manda ali.",
+  "O Lamento de Sylvaris": "A Árvore-Mundo adoece, e a equipe precisa descer às raízes antes que a floresta perca o próprio rumo.",
+  "As Cinzas de Vera Cruz": "As Casas voltam para libertar Califa, mas vencer a guerra não resolve sozinho o que causou a queda.",
+  "A Coroa e as Correntes": "O golpe chega ao palácio, e as defesas de Celestria viram uma armadilha contra a própria cidade.",
+  "O Preço do Retorno": "Kael volta para uma DuskCreek ocupada e descobre que seus aliados tiveram de aprender a resistir sem ele.",
+  "Além do Véu": "Quatro marcas levam o grupo até uma rachadura no Plano Astral — e talvez não exista caminho simples de volta."
 };
 
 const el = (id) => document.getElementById(id);
