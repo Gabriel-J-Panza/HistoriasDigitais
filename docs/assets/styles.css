@@ -42,9 +42,9 @@ a { color: inherit; }
 .marker--eldor { left: 36%; top: 10%; width: 29%; }
 .marker--celestria { left: 65%; top: 11%; width: 25%; }
 .marker--glacius { left: 7%; top: 36%; width: 30%; clip-path: polygon(39% 0, 70% 10%, 96% 40%, 88% 82%, 57% 100%, 22% 88%, 0 56%, 9% 19%); }
-.marker--sylvaris { left: 70%; top: 32%; width: 21%; clip-path: polygon(44% 0, 78% 9%, 100% 42%, 89% 83%, 58% 100%, 20% 88%, 0 54%, 12% 18%); }
-.marker--ghasthys { left: 39%; top: 45%; width: 30%; clip-path: polygon(49% 0, 87% 18%, 100% 59%, 78% 94%, 38% 100%, 7% 78%, 0 38%, 18% 10%); }
-.marker--dustcreek { left: 74%; top: 50%; width: 20%; clip-path: polygon(25% 5%, 78% 0, 100% 34%, 90% 82%, 54% 100%, 6% 78%, 0 38%); }
+.marker--sylvaris { left: 73%; top: 31%; width: 21%; clip-path: polygon(44% 0, 78% 9%, 100% 42%, 89% 83%, 58% 100%, 20% 88%, 0 54%, 12% 18%); }
+.marker--ghasthys { left: 44%; top: 45%; width: 30%; clip-path: polygon(49% 0, 87% 18%, 100% 59%, 78% 94%, 38% 100%, 7% 78%, 0 38%, 18% 10%); }
+.marker--dustcreek { left: 75%; top: 54%; width: 20%; clip-path: polygon(25% 5%, 78% 0, 100% 34%, 90% 82%, 54% 100%, 6% 78%, 0 38%); }
 .marker--califa { left: 9%; top: 62%; width: 28%; }
 .marker--dustywood { left: 40%; top: 65%; width: 32%; clip-path: polygon(18% 10%, 78% 0, 100% 36%, 88% 86%, 50% 100%, 7% 82%, 0 36%); }
 .map-legend { display: none; }
