@@ -31,7 +31,8 @@
         <h1 id="mapTitle">Escolha uma cidade no mapa</h1>
         <p>Entre pelas fronteiras de Aurelia e acompanhe cada saga em uma versão contínua, textual e organizada em capítulos.</p>
       </div>
-      <div class="map-frame">
+      <div class="book" id="book" aria-label="Livro de Aurelia">
+        <div class="book-page book-page--map">
         <img src="assets/aurelia-map.png" alt="Mapa ilustrado do Reino de Aurelia com oito cidades" width="1728" height="1808">
         <nav class="city-markers" aria-label="Cidades de Aurelia">
           <a class="marker marker--eldor" href="#/cidade/eldor" data-city="eldor"><span>Eldor</span></a>
@@ -43,6 +44,17 @@
           <a class="marker marker--califa" href="#/cidade/califa" data-city="califa"><span>Califa</span></a>
           <a class="marker marker--dustywood" href="#/cidade/dustywood" data-city="dustywood"><span>DustyWood</span></a>
         </nav>
+        </div>
+        <div class="book-page book-page--future" id="bookFuture" aria-hidden="true">
+          <span class="eyebrow">Próxima página</span>
+          <h2>Novas terras estão a caminho</h2>
+          <p>Este espaço está sendo preparado para receber novas cidades, rotas e histórias de Aurelia.</p>
+          <span class="future-mark">Em construção</span>
+        </div>
+        <button class="page-turn" id="pageTurn" type="button" aria-expanded="false" aria-controls="bookFuture">
+          <span aria-hidden="true">↷</span><span class="page-turn__label">Virar página</span>
+        </button>
+        <p class="page-hint">Clique para conhecer o que vem depois do mapa</p>
       </div>
       <div class="map-legend" aria-label="Lista de cidades" id="mapLegend"></div>
     </section>

@@ -171,6 +171,15 @@ function route() {
 }
 
 el("homeButton").addEventListener("click", () => location.hash = "#/");
+el("pageTurn").addEventListener("click", () => {
+  const book = el("book");
+  const future = el("bookFuture");
+  const flipped = book.classList.toggle("is-flipped");
+  future.setAttribute("aria-hidden", String(!flipped));
+  el("pageTurn").setAttribute("aria-expanded", String(flipped));
+  el("pageTurn").querySelector(".page-turn__label").textContent = flipped ? "Voltar ao mapa" : "Virar página";
+  el("pageTurn").querySelector("span").textContent = flipped ? "↶" : "↷";
+});
 el("chapterNav").addEventListener("click", event => {
   const toggle = event.target.closest(".chapter-nav__toggle");
   if (toggle) {
