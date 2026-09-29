@@ -117,7 +117,8 @@ a { color: inherit; }
 footer { padding: 2rem clamp(1rem,4vw,4rem); color: #ae9f8b; background: var(--night); font: .8rem var(--sans); }
 
 @media (max-width: 900px) {
-  .map-view { height: calc(100vh - 74px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 1rem; padding-top: 1.5rem; }
+  body:not(.city-open) { height: auto; min-height: 100svh; overflow-x: hidden; overflow-y: auto; }
+  .map-view { height: auto; min-height: calc(100svh - 74px); grid-template-columns: 1fr; grid-template-rows: auto auto; gap: 1rem; padding-top: 1.5rem; overflow: visible; }
   .map-intro { position: static; padding: 0; }
   .map-intro h1 { max-width: 12ch; font-size: clamp(2.8rem, 13vw, 5rem); }
   .book { justify-self: center; width: min(100%, 520px); max-height: 100%; }
@@ -141,9 +142,11 @@ footer { padding: 2rem clamp(1rem,4vw,4rem); color: #ae9f8b; background: var(--n
   .follow-button span:last-child { display: none; }
   .site-header .wordmark { grid-column: 1; grid-row: 1; }
   body.city-open .wordmark { display: none; }
-  .map-view { height: calc(100svh - 66px); padding: 1rem 0; overflow: hidden; }
+  .map-view { height: auto; min-height: calc(100svh - 66px); padding: 1rem 0 1.5rem; overflow: visible; }
   .map-intro { padding-inline: 1.2rem; }
-  .book { width: 100%; transform: none; }
+  .map-intro h1 { max-width: 10ch; font-size: clamp(2.5rem, 13vw, 4rem); }
+  .map-intro > p:last-child { margin-bottom: .5rem; font-size: .98rem; }
+  .book { width: calc(100% - 1rem); transform: none; }
   .page-turn__label { display: none; }
   .city-tabs { top: 66px; justify-content: flex-start; overflow-x: auto; }
   .city-tabs button { white-space: nowrap; padding-inline: .75rem; }
