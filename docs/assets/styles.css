@@ -15,6 +15,8 @@
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: #17120e; font-family: var(--serif); font-size: 1rem; line-height: 1.72; }
+body:not(.city-open) { height: 100vh; overflow: hidden; }
+body:not(.city-open) footer { display: none; }
 button, a { font: inherit; }
 a { color: inherit; }
 .skip-link { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .65rem 1rem; background: white; color: black; transform: translateY(-150%); }
@@ -35,10 +37,10 @@ a { color: inherit; }
 .map-intro .eyebrow { color: var(--gold); }
 .map-intro h1 { margin: 0; max-width: 9ch; font-size: clamp(3rem, 7vw, 6.6rem); line-height: .95; font-weight: 400; letter-spacing: -.04em; }
 .map-intro > p:last-child { max-width: 37ch; color: #cabda9; font-size: 1.08rem; }
-.book { position: relative; width: min(100%, 650px); max-height: 100%; justify-self: end; perspective: 1400px; filter: drop-shadow(0 28px 60px rgba(0,0,0,.55)); }
+.book { position: relative; width: min(100%, 590px, calc((100vh - 140px) * .956)); max-height: 100%; justify-self: end; perspective: 1400px; filter: drop-shadow(0 28px 60px rgba(0,0,0,.55)); }
 .book-page { position: relative; overflow: hidden; border: 10px solid #563a22; border-radius: 3px 9px 9px 3px; background: #e9d2a4; box-shadow: inset 12px 0 24px rgba(46,25,10,.2), 0 2px 0 rgba(255,255,255,.18); }
 .book-page--map { z-index: 2; transform-origin: left center; transition: transform .85s cubic-bezier(.2,.7,.2,1), box-shadow .85s ease; backface-visibility: hidden; }
-.book-page--map img { display: block; width: 100%; max-height: calc(100vh - 105px); height: auto; object-fit: contain; }
+.book-page--map img { display: block; width: 100%; height: auto; object-fit: contain; }
 .book-page--future { position: absolute; inset: 0; z-index: 1; display: grid; align-content: center; justify-items: center; gap: 1rem; padding: 3rem; color: #47321f; text-align: center; background: radial-gradient(circle at 35% 20%, #f7e9c7, #d6b77d); transform: translateX(3px); }
 .book-page--future h2 { max-width: 11ch; margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; font-weight: 400; }
 .book-page--future p { max-width: 28ch; margin: 0; color: #6d5437; font-size: 1.05rem; }
@@ -47,7 +49,6 @@ a { color: inherit; }
 .page-turn { position: absolute; z-index: 5; right: .9rem; bottom: .9rem; display: inline-flex; align-items: center; gap: .4rem; border: 1px solid rgba(255,238,194,.75); border-radius: 999px; padding: .5rem .8rem; color: #fff6df; background: rgba(46,25,10,.86); cursor: pointer; font: 700 .76rem var(--sans); }
 .book.is-flipped .page-turn { right: auto; left: .9rem; }
 .page-turn:hover, .page-turn:focus-visible { color: #2b1c10; background: #f2d49b; outline: none; }
-.page-hint { position: absolute; z-index: 5; right: 1rem; bottom: -2rem; margin: 0; color: #bbaa95; font: .72rem var(--sans); }
 .city-markers { position: absolute; inset: 0; }
 .city-map-overlay { display: block; width: 100%; height: 100%; overflow: visible; }
 .city-map-overlay a { color: inherit; }
@@ -143,7 +144,6 @@ footer { padding: 2rem clamp(1rem,4vw,4rem); color: #ae9f8b; background: var(--n
   .map-view { height: calc(100svh - 66px); padding: 1rem 0; overflow: hidden; }
   .map-intro { padding-inline: 1.2rem; }
   .book { width: 100%; transform: none; }
-  .page-hint { display: none; }
   .page-turn__label { display: none; }
   .city-tabs { top: 66px; justify-content: flex-start; overflow-x: auto; }
   .city-tabs button { white-space: nowrap; padding-inline: .75rem; }
