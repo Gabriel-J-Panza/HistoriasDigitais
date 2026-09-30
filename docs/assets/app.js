@@ -94,7 +94,7 @@ const expansions = window.AURELIA_EXPANSIONS || {};
 let bookStep = 0;
 
 function setBookStep(step) {
-  bookStep = Math.max(0, Math.min(2, step));
+  bookStep = Math.max(0, Math.min(3, step));
   const stage = el("atlasStage");
   stage.dataset.bookStep = String(bookStep);
   document.querySelectorAll("[data-book-panel]").forEach((panel, index) => {
@@ -105,12 +105,12 @@ function setBookStep(step) {
   const previous = el("bookPrev");
   const next = el("bookNext");
   previous.hidden = bookStep === 0;
-  next.hidden = bookStep !== 1;
-  previous.querySelector(".atlas-nav__label").textContent = bookStep === 2 ? "Introdução" : "Capa";
-  next.querySelector(".atlas-nav__label").textContent = "Mapa";
+  next.hidden = bookStep === 0 || bookStep === 3;
+  previous.querySelector(".atlas-nav__label").textContent = bookStep === 3 ? "Mapa" : bookStep === 2 ? "Introdução" : "Capa";
+  next.querySelector(".atlas-nav__label").textContent = bookStep === 2 ? "Próxima página" : "Mapa";
   const dots = [...el("bookProgress").children];
   dots.forEach((dot, index) => dot.classList.toggle("is-current", index === bookStep));
-  el("bookProgress").setAttribute("aria-label", `Página ${bookStep + 1} de 3`);
+  el("bookProgress").setAttribute("aria-label", `Página ${bookStep + 1} de 4`);
 }
 
 function renderLegend() {
