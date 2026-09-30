@@ -25,37 +25,60 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <section class="map-view" id="mapView" aria-labelledby="mapTitle">
-      <div class="map-intro">
-        <p class="eyebrow">Um reino, muitas cicatrizes</p>
-        <h1 id="mapTitle">Escolha uma cidade no mapa</h1>
-        <p>Entre pelas fronteiras de Aurelia e acompanhe cada saga em uma versão contínua, textual e organizada em capítulos.</p>
-      </div>
-      <div class="book" id="book" aria-label="Livro de Aurelia">
-        <div class="book-page book-page--map">
-        <img src="assets/aurelia-map.png" alt="Mapa ilustrado do Reino de Aurelia com oito cidades" width="1728" height="1808">
-        <nav class="city-markers" aria-label="Cidades de Aurelia">
-          <svg class="city-map-overlay" viewBox="0 0 1728 1808" preserveAspectRatio="none" aria-hidden="false">
-            <a href="#/cidade/eldor" data-city="eldor" aria-label="Eldor"><path d="M790 220 L920 280 L1030 365 L1040 535 L970 600 L800 625 L630 590 L565 490 L590 370 L700 290 Z" /></a>
-            <a href="#/cidade/celestria" data-city="celestria" aria-label="Celestria"><path d="M1325 220 L1400 235 L1465 260 L1510 385 L1490 470 L1440 515 L1360 510 L1300 545 L1210 560 L1160 500 L1170 400 L1190 315 L1260 250 Z" /></a>
-            <a href="#/cidade/glacius" data-city="glacius" aria-label="Glacius"><ellipse cx="342" cy="911" rx="158" ry="157" /></a>
-            <a href="#/cidade/sylvaris" data-city="sylvaris" aria-label="Sylvaris"><path d="M1420 610 L1515 625 L1595 685 L1625 780 L1600 870 L1535 930 L1435 950 L1340 920 L1275 850 L1260 760 L1290 685 L1355 630 Z" /></a>
-            <a class="city-map-overlay__ghasthys" href="#/cidade/ghasthys" data-city="ghasthys" aria-label="Ghasthys"><ellipse cx="965" cy="875" rx="300" ry="213" transform="rotate(-18 965 875)" /></a>
-            <a href="#/cidade/dustcreek" data-city="dustcreek" aria-label="DustCreek"><path d="M1495 1040 L1590 1050 L1665 1110 L1670 1220 L1625 1285 L1515 1305 L1405 1270 L1360 1175 L1400 1095 Z" /></a>
-            <a href="#/cidade/califa" data-city="califa" aria-label="Califa"><path d="M300 1245 L440 1250 L535 1320 L555 1435 L510 1535 L390 1580 L255 1545 L155 1460 L170 1360 Z" /></a>
-            <a href="#/cidade/dustywood" data-city="dustywood" aria-label="DustyWood"><path d="M760 1370 L900 1350 L970 1370 L1090 1340 L1170 1380 L1160 1530 L1070 1580 L930 1540 L820 1590 L740 1540 L720 1440 Z" /></a>
-          </svg>
-        </nav>
-        </div>
-        <div class="book-page book-page--future" id="bookFuture" aria-hidden="true">
-          <span class="eyebrow">Próxima página</span>
-          <h2>Novas terras estão a caminho</h2>
-          <p>Este espaço está sendo preparado para receber novas cidades, rotas e histórias de Aurelia.</p>
-          <span class="future-mark">Em construção</span>
-        </div>
-        <button class="page-turn" id="pageTurn" type="button" aria-expanded="false" aria-controls="bookFuture">
-          <span aria-hidden="true">↷</span><span class="page-turn__label">Virar página</span>
-        </button>
+    <section class="map-view" id="mapView" aria-labelledby="bookTitle">
+      <div class="atlas-stage" id="atlasStage" data-book-step="0">
+        <section class="atlas-panel atlas-cover is-active" data-book-panel="0" aria-hidden="false">
+          <img src="assets/aurelia-cover.jpg" alt="Paisagem fantástica reunindo os diferentes reinos de Aurelia" width="1024" height="1536">
+          <div class="atlas-cover__shade"></div>
+          <div class="atlas-cover__content">
+            <p class="eyebrow">Crônicas de um continente marcado</p>
+            <h1 id="bookTitle">Os Segredos de Aurelia</h1>
+            <p>Um atlas de cidades, mistérios e histórias que ainda estão sendo escritas.</p>
+            <button class="atlas-cover__open" id="openBook" type="button"><span>Abrir o livro</span><span aria-hidden="true">→</span></button>
+          </div>
+        </section>
+
+        <section class="atlas-panel atlas-spread atlas-intro" data-book-panel="1" aria-hidden="true">
+          <article class="atlas-page atlas-page--left">
+            <p class="eyebrow">Há quinhentos anos</p>
+            <h2>Um continente dividido pelo próprio clima</h2>
+            <p class="atlas-dropcap">Aurelia sempre foi uma terra de contrastes, mas seu clima caótico tem uma origem sombria. Há quinhentos anos, uma figura cuja identidade se perdeu no tempo lançou uma maldição sobre o continente.</p>
+            <p>O clima deixou de seguir estações e fronteiras naturais. Cada região desenvolveu sua própria biodiversidade, como se fosse parte de um mundo diferente. Em poucas jornadas, um viajante pode sair do gelo de Glacius, atravessar a névoa de Ghasthys e alcançar as florestas vivas de Sylvaris ou o calor das cidades do deserto.</p>
+          </article>
+          <article class="atlas-page atlas-page--right">
+            <p class="eyebrow">Um reino que aprendeu a sobreviver</p>
+            <h2>A diferença virou caminho</h2>
+            <p>Por gerações, a maldição destruiu colheitas, isolou povoados e tornou grandes áreas inabitáveis. A sobrevivência veio devagar. Cidades passaram a erguer muralhas contra o frio, cultivar terras improváveis, construir casas entre raízes e transformar magia, rios e antigas rotas em sustento. O que parecia apenas uma condenação também moldou culturas que não existem em nenhum outro lugar.</p>
+            <p>Quando os líderes voltaram a conversar, nasceram alianças e rotas comerciais entre reinos antes isolados. Aurelia ficou mais viva e conectada. Agora, porém, máquinas arcanas falham, florestas adoecem, névoas guardam vozes e artefatos esquecidos despertam. Talvez sejam crises separadas. Talvez a antiga maldição ainda esconda algo.</p>
+          </article>
+        </section>
+
+        <section class="atlas-panel atlas-spread atlas-map-spread" data-book-panel="2" aria-hidden="true">
+          <div class="atlas-map-caption">
+            <p class="eyebrow">Atlas de Aurelia</p>
+            <h2>Escolha uma cidade</h2>
+            <p>Passe sobre uma região e abra sua crônica.</p>
+          </div>
+          <div class="atlas-map-art">
+            <img src="assets/aurelia-map.png" alt="Mapa ilustrado do Reino de Aurelia com oito cidades" width="1728" height="1808">
+            <nav class="city-markers" aria-label="Cidades de Aurelia">
+              <svg class="city-map-overlay" viewBox="0 0 1728 1808" preserveAspectRatio="none" aria-hidden="false">
+                <a href="#/cidade/eldor" data-city="eldor" aria-label="Eldor"><path d="M790 220 L920 280 L1030 365 L1040 535 L970 600 L800 625 L630 590 L565 490 L590 370 L700 290 Z" /></a>
+                <a href="#/cidade/celestria" data-city="celestria" aria-label="Celestria"><path d="M1325 220 L1400 235 L1465 260 L1510 385 L1490 470 L1440 515 L1360 510 L1300 545 L1210 560 L1160 500 L1170 400 L1190 315 L1260 250 Z" /></a>
+                <a href="#/cidade/glacius" data-city="glacius" aria-label="Glacius"><ellipse cx="342" cy="911" rx="158" ry="157" /></a>
+                <a href="#/cidade/sylvaris" data-city="sylvaris" aria-label="Sylvaris"><path d="M1420 610 L1515 625 L1595 685 L1625 780 L1600 870 L1535 930 L1435 950 L1340 920 L1275 850 L1260 760 L1290 685 L1355 630 Z" /></a>
+                <a class="city-map-overlay__ghasthys" href="#/cidade/ghasthys" data-city="ghasthys" aria-label="Ghasthys"><ellipse cx="965" cy="875" rx="300" ry="213" transform="rotate(-18 965 875)" /></a>
+                <a href="#/cidade/dustcreek" data-city="dustcreek" aria-label="DustCreek"><path d="M1495 1040 L1590 1050 L1665 1110 L1670 1220 L1625 1285 L1515 1305 L1405 1270 L1360 1175 L1400 1095 Z" /></a>
+                <a href="#/cidade/califa" data-city="califa" aria-label="Califa"><path d="M300 1245 L440 1250 L535 1320 L555 1435 L510 1535 L390 1580 L255 1545 L155 1460 L170 1360 Z" /></a>
+                <a href="#/cidade/dustywood" data-city="dustywood" aria-label="DustyWood"><path d="M760 1370 L900 1350 L970 1370 L1090 1340 L1170 1380 L1160 1530 L1070 1580 L930 1540 L820 1590 L740 1540 L720 1440 Z" /></a>
+              </svg>
+            </nav>
+          </div>
+        </section>
+
+        <button class="atlas-nav atlas-nav--prev" id="bookPrev" type="button" aria-label="Voltar uma página" hidden><span aria-hidden="true">←</span><span class="atlas-nav__label">Voltar</span></button>
+        <button class="atlas-nav atlas-nav--next" id="bookNext" type="button" aria-label="Avançar uma página" hidden><span class="atlas-nav__label">Mapa</span><span aria-hidden="true">→</span></button>
+        <div class="atlas-progress" id="bookProgress" aria-label="Página 1 de 3"><span class="is-current"></span><span></span><span></span></div>
       </div>
       <div class="map-legend" aria-label="Lista de cidades" id="mapLegend"></div>
     </section>

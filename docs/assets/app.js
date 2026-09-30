@@ -91,6 +91,27 @@ const el = (id) => document.getElementById(id);
 const slug = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const stories = window.AURELIA_STORIES || [];
 const expansions = window.AURELIA_EXPANSIONS || {};
+let bookStep = 0;
+
+function setBookStep(step) {
+  bookStep = Math.max(0, Math.min(2, step));
+  const stage = el("atlasStage");
+  stage.dataset.bookStep = String(bookStep);
+  document.querySelectorAll("[data-book-panel]").forEach((panel, index) => {
+    const active = index === bookStep;
+    panel.classList.toggle("is-active", active);
+    panel.setAttribute("aria-hidden", String(!active));
+  });
+  const previous = el("bookPrev");
+  const next = el("bookNext");
+  previous.hidden = bookStep === 0;
+  next.hidden = bookStep !== 1;
+  previous.querySelector(".atlas-nav__label").textContent = bookStep === 2 ? "Introdução" : "Capa";
+  next.querySelector(".atlas-nav__label").textContent = "Mapa";
+  const dots = [...el("bookProgress").children];
+  dots.forEach((dot, index) => dot.classList.toggle("is-current", index === bookStep));
+  el("bookProgress").setAttribute("aria-label", `Página ${bookStep + 1} de 3`);
+}
 
 function renderLegend() {
   el("mapLegend").innerHTML = Object.entries(CITIES).map(([id, c]) => `<a href="#/cidade/${id}">${c.name}</a>`).join("");
@@ -170,16 +191,11 @@ function route() {
   match ? renderCity(match[1]) : showMap();
 }
 
-el("homeButton").addEventListener("click", () => location.hash = "#/");
-el("pageTurn").addEventListener("click", () => {
-  const book = el("book");
-  const future = el("bookFuture");
-  const flipped = book.classList.toggle("is-flipped");
-  future.setAttribute("aria-hidden", String(!flipped));
-  el("pageTurn").setAttribute("aria-expanded", String(flipped));
-  el("pageTurn").querySelector(".page-turn__label").textContent = flipped ? "Voltar ao mapa" : "Virar página";
-  el("pageTurn").querySelector("span").textContent = flipped ? "↶" : "↷";
-});
+el("homeButton").addEventListener("click", () => { setBookStep(2); location.hash = "#/"; });
+document.querySelector(".wordmark").addEventListener("click", () => setBookStep(0));
+el("openBook").addEventListener("click", () => setBookStep(1));
+el("bookPrev").addEventListener("click", () => setBookStep(bookStep - 1));
+el("bookNext").addEventListener("click", () => setBookStep(bookStep + 1));
 el("chapterNav").addEventListener("click", event => {
   const toggle = event.target.closest(".chapter-nav__toggle");
   if (toggle) {
@@ -203,4 +219,5 @@ document.querySelectorAll("[role=tab]").forEach(btn => btn.addEventListener("key
 }));
 window.addEventListener("hashchange", route);
 renderLegend();
+setBookStep(0);
 route();
