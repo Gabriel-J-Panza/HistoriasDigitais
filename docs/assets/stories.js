@@ -599,7 +599,7 @@ window.AURELIA_STORIES = [
           "A memória ainda era recente, um pesadelo que se recusava a apagar. O dia em que o acolhimento de Celestria quase foi sua ruína.",
           "Disfarçados entre os viajantes e comerciantes, os seguidores do Deus Tirano se infiltraram. O Culto de Bane havia fincado raízes profundas sob a cidade.",
           "Seu objetivo era impensável: usar a rica energia vital de Celestria para rasgar o véu e trazer Bane de volta à terra.",
-          "A líder do reino, recém-coroada, viu-se paralisada. Seus exércitos, treinados para a paz, eram inúteis contra a magia profana e o terror encarnado.",
+          "A rainha Isabel Wrynn, recém-coroada, viu-se paralisada. Seus exércitos, treinados para a paz, eram inúteis contra a magia profana e o terror encarnado.",
           "Bane estava a um suspiro de caminhar sobre Celestria, pronto para transformar o paraíso verdejante em um império de cinzas e submissão.",
           "Foi então que a verdadeira força de Celestria se revelou. Entre seus defensores estavam os três aventureiros que já haviam enfrentado os horrores da Cidade dos Espectros de Ghastys, agora unidos àqueles que chamavam Celestria de lar.",
           "Um grupo improvável de heróis colocou-se na linha de frente. Moradores e viajantes unidos por um único propósito: proteger o reino da tirania."
@@ -612,14 +612,14 @@ window.AURELIA_STORIES = [
           "No momento de maior desespero, quando a mão escura de Bane quase tocou o solo de Celestria, os heróis atacaram o altar principal.",
           "Com um estrondo que sacudiu as fundações do reino, o ritual foi quebrado. Bane foi banido de volta para a escuridão antes de conseguir respirar o ar da terra.",
           "A cidade foi salva. A luz retornou. Celestria respirou novamente, mas o ar que entrava em seus pulmões agora tinha um gosto diferente.",
-          "A rainha honrou os salvadores. Eles foram celebrados com banquetes e canções. O povo aplaudiu os heróis, mas em silêncio, questionou a coroa.",
+          "A rainha Isabel Wrynn honrou os salvadores. Eles foram celebrados com banquetes e canções. O povo aplaudiu os heróis, mas em silêncio, questionou a coroa.",
           "O tempo passou e muitos dos heróis viajantes seguiram seus caminhos, levados por novos ventos de aventura. Celestria voltou a ficar por conta própria.",
           "O reino tentou voltar à sua rotina aconchegante. As flores desabrocharam, os peixes voltaram às redes, mas algo fundamental havia se quebrado.",
           "O trauma deixou cicatrizes invisíveis. A sombra do quase ressurgimento de Bane deixou para trás um veneno lento e silencioso: a desconfiança.",
           "O turismo, antes o sangue vibrante do reino, começou a enfraquecer. Viajantes agora hesitavam em visitar a cidade que quase se tornou o portal do submundo.",
           "Entre os moradores, a paranoia se enraizou. Qualquer comportamento estranho era motivo de sussurros. \"Onde ele estava no dia do ritual?\", perguntavam-se.",
-          "O povo olhava para a sua líder. Uma rainha que governava com bondade, mas que no momento mais sombrio da história, dependera de estranhos para salvar sua casa.",
-          "A preocupação quanto à força da rainha se transformou em conversas noturnas. A segurança que ela proporcionava já não era tida como certa."
+          "O povo olhava para sua líder. Isabel Wrynn governava com bondade, mas, no momento mais sombrio da história, dependera de estranhos para salvar sua casa.",
+          "A preocupação quanto à força da rainha Isabel Wrynn se transformou em conversas noturnas. A segurança que ela proporcionava já não era tida como certa."
         ]
       },
       {
@@ -627,16 +627,16 @@ window.AURELIA_STORIES = [
         "paragraphs": [
           "Os esforços para fortalecer a guarda local esbarravam no medo e na incerteza. Como espadas normais poderiam proteger o reino da fúria dos deuses?",
           "As pessoas comuns começaram a se fechar. A cidade acolhedora tornou-se um labirinto de portas trancadas e olhares furtivos.",
-          "Como a nova rainha conseguiria recuperar a confiança de seu povo? Suas palavras de conforto soavam vazias contra o eco do terror recente.",
+          "Como Isabel Wrynn conseguiria recuperar a confiança de seu povo? Suas palavras de conforto soavam vazias contra o eco do terror recente.",
           "Onde há medo crônico, há oportunidade. E no vácuo da confiança, ambições perigosas começam a despertar.",
           "Nas sombras das estalagens que os heróis costumavam frequentar, começaram as reuniões. Os ricos e os insatisfeitos discutiam uma mudança de rumo.",
           "Os sussurros traziam notícias de longe. Falavam de cidades como DustCreek, onde um golpe de Estado bem-sucedido instaurou uma nova era de força e prosperidade.",
           "Seria essa a oportunidade perfeita para uma revolução? Lorde Valerius, um aristocrata eloquente, começou a dar voz à ansiedade do povo.",
           "Ele não falava de traição, falava de \"segurança\". Falava sobre como a coroa precisava de punhos de ferro, não de abraços de veludo.",
-          "A rainha via sua influência escorrer pelos dedos. A cada dia, mais moradores da cidade olhavam para Valerius como o pilar que faltava à coroa.",
+          "Isabel Wrynn via sua influência escorrer pelos dedos. A cada dia, mais moradores da cidade olhavam para Valerius como o pilar que faltava à coroa.",
           "A pressão aumentava. O povo não queria mais ser um porto aberto; queriam fortificações. Queriam garantias de que os pesadelos nunca mais voltariam.",
           "Valerius tentou aliciar até mesmo os heróis locais que ficaram. Ele argumentava que a coroa era um navio afundando, e que Celestria precisava de um novo timoneiro.",
-          "A desconfiança criava uma barreira invisível, porém intransponível, entre a governante e seus governados. A bondade era lida como fraqueza."
+          "A desconfiança criava uma barreira invisível, porém intransponível, entre a rainha Isabel Wrynn e seus governados. A bondade era lida como fraqueza."
         ]
       },
       {
@@ -650,9 +650,9 @@ window.AURELIA_STORIES = [
           "Eles eram as cinzas que sobreviveram ao fogo. O Culto de Bane não havia sido extirpado; havia apenas evoluído.",
           "Eles aprenderam com seu fracasso. Sabiam que lâminas e sacrifícios em becos escuros atraíam heróis. Entenderam que o poder de verdade é conquistado com burocracia e confiança.",
           "O culto voltou disfarçado de uma forma mais eloquente. Usavam milagres manipulados e caridade como suas novas armas para conquistar o povo que antes tentaram destruir.",
-          "Lorde Valerius, cego por sua ambição de destronar a rainha, tornou-se o peão perfeito. Ele lhes dava a legitimidade política de que o culto precisava.",
+          "Lorde Valerius, cego por sua ambição de destronar Isabel Wrynn, tornou-se o peão perfeito. Ele lhes dava a legitimidade política de que o culto precisava.",
           "Eles não precisavam mais se esconder nos esgotos. Celestria estava literalmente construindo o novo altar de Bane em praça pública, pagando por ele com gratidão.",
-          "A rainha e seus aliados leais notaram as falhas. Havia algo errado nas promessas perfeitas da Irmandade. Mas levantar a voz contra os salvadores populares seria o suicídio político da coroa.",
+          "Isabel Wrynn e seus aliados leais notaram as falhas. Havia algo errado nas promessas perfeitas da Irmandade. Mas levantar a voz contra os salvadores populares seria o suicídio político da coroa.",
           "O Capitão da Guarda, veterano do primeiro confronto, sentiu o cheiro de magia antiga e sangue escondido sob o perfume de rosas da Irmandade. A investigação silenciosa recomeçou."
         ]
       },
@@ -662,12 +662,12 @@ window.AURELIA_STORIES = [
           "Ele percebeu que Celestria estava sendo devorada de dentro para fora. Sem exércitos, ele tentou convocar os velhos companheiros viajantes. Mas o tempo corria rápido demais.",
           "O culto disfarçado estava prestes a roubar tudo para si. A cidade, a política, e, eventualmente, a vida de todos. A teia estava armada com perfeição.",
           "O dia do golpe chegou. Não com espadas em punho nas ruas, mas com pergaminhos, leis e um exército de guardas subornados marchando para o salão do trono.",
-          "Valerius exigiu a abdicação da rainha. Declarou-a incapaz, citando os recentes avanços de DustCreek como prova de que líderes fracos deviam dar lugar aos fortes.",
-          "Mas a rainha de Celestria não cederia sem lutar. A desconfiança de seu povo a havia ferido, mas a traição aberta acendeu uma fúria real em seu coração.",
+          "Valerius exigiu a abdicação de Isabel Wrynn. Declarou-a incapaz, citando os recentes avanços de DustCreek como prova de que líderes fracos deviam dar lugar aos fortes.",
+          "Mas a rainha Isabel Wrynn não cederia sem lutar. A desconfiança de seu povo a havia ferido, mas a traição aberta acendeu uma fúria real em seu coração.",
           "Aproveitando o caos do confronto político, o líder da Irmandade iniciou o feitiço. Os obeliscos, erguidos com o dinheiro do povo, começaram a ressoar com o poder opressivo de Bane.",
           "A farsa caiu. A luz branca dos pilares corrompeu-se em um vermelho-sangue, drenando a energia vital da terra de Celestria e sufocando os cidadãos.",
-          "A revelação expôs Valerius ao seu próprio erro. O herói local e os guardas ainda fiéis à coroa invadiram o salão, iniciando um confronto desesperado para proteger a rainha.",
-          "O golpe de Estado político transformou-se no segundo ritual de sacrifício. E, desta vez, a vítima no centro do altar seria a própria rainha de Celestria.",
+          "A revelação expôs Valerius ao seu próprio erro. O herói local e os guardas ainda fiéis à coroa invadiram o salão, iniciando um confronto desesperado para proteger Isabel Wrynn.",
+          "O golpe de Estado político transformou-se no segundo ritual de sacrifício. E, desta vez, a vítima no centro do altar seria a própria Isabel Wrynn.",
           "Muitas oportunidades e variáveis colidiram neste único instante. Celestria estava presa em uma rede de mentiras que ela mesma financiou por medo.",
           "A desconfiança havia aberto as portas para a tirania mais uma vez. Mas o grito de socorro do Capitão havia alcançado os mares distantes. Os velhos amigos estavam retornando.",
           "Serão os heróis capazes de chegar a tempo para salvar uma cidade que abraçou seus próprios algozes? Ou Celestria cairá para sempre na escuridão? A verdadeira batalha pela confiança, e pela sobrevivência, apenas começou."

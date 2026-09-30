@@ -42,7 +42,7 @@ const CITIES = {
     name: "Celestria", region: "Costa oriental · celeiro de Aurelia", accent: "#6f4f86",
     lead: "Uma terra de colheitas fartas e águas ricas aprende que prosperidade também atrai quem deseja convertê-la em poder, obediência e sacrifício.",
     atmosphere: "Fantasia régia", conflict: "Conspiração e golpe",
-    heroes: [["Rainha Celestina", "Soberana e guardiã", "Protege cidade e defensores mesmo quando os próprios mecanismos de proteção são voltados contra o reino."], ["Darian", "Viajante de Ghasthys · guerreiro", "Abre caminho pela cidade sitiada para alcançar o palácio."], ["Seris", "Viajante de Ghasthys · maga", "Lê as correntes de energia dos obeliscos e procura interromper o cerco."], ["Nilo", "Viajante de Ghasthys · ladino", "Usa passagens laterais e brechas que o ataque frontal não alcança."]],
+    heroes: [["Rainha Isabel Wrynn", "Soberana e guardiã", "Protege cidade e defensores mesmo quando os próprios mecanismos de proteção são voltados contra o reino."], ["Darian", "Viajante de Ghasthys · guerreiro", "Abre caminho pela cidade sitiada para alcançar o palácio."], ["Seris", "Viajante de Ghasthys · maga", "Lê as correntes de energia dos obeliscos e procura interromper o cerco."], ["Nilo", "Viajante de Ghasthys · ladino", "Usa passagens laterais e brechas que o ataque frontal não alcança."]],
     npcs: [["Valerius", "Aristocrata", "Ajuda a enfraquecer as defesas e descobre tarde demais que nunca seria senhor do novo regime."], ["Capitão Marek", "Comandante da Guarda", "Veterano do primeiro confronto contra Bane; percebe a infiltração antes que a Irmandade revele seu ritual."], ["Irmandade Escarlate", "Ordem conspiradora", "Transforma obras de proteção em uma rede de extração e cerco."], ["Guarda leal", "Defensores", "Recua até o salão do trono para preservar a última linha de resistência."]]
   },
   dustcreek: {
@@ -151,7 +151,7 @@ function renderCity(id) {
         paragraphs.splice(insertAt, 0, ...expanded);
       }
       if (id === "celestria") {
-        const names = [[/\bA rainha\b/g, "Rainha Celestina"], [/\ba rainha\b/g, "a Rainha Celestina"], [/\bO guerreiro\b/g, "Darian"], [/\bo guerreiro\b/g, "Darian"], [/\bA maga\b/g, "Seris"], [/\ba maga\b/g, "Seris"], [/\bO ladino\b/g, "Nilo"], [/\bo ladino\b/g, "Nilo"], [/\bO Capitão\b/g, "Capitão Marek"], [/\bo Capitão\b/g, "Capitão Marek"]];
+        const names = [[/\bA jovem rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba jovem rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA nova rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba nova rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA rainha de Celestria(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba rainha de Celestria(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bRainha Celestina\b/g, "Rainha Isabel Wrynn"], [/\bO guerreiro\b/g, "Darian"], [/\bo guerreiro\b/g, "Darian"], [/\bA maga\b/g, "Seris"], [/\ba maga\b/g, "Seris"], [/\bO ladino\b/g, "Nilo"], [/\bo ladino\b/g, "Nilo"], [/\bO Capitão\b/g, "Capitão Marek"], [/\bo Capitão\b/g, "Capitão Marek"]];
         paragraphs.splice(0, paragraphs.length, ...paragraphs.map(paragraph => names.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), paragraph)));
       }
       if (id === "ghasthys") {
