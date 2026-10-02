@@ -105,6 +105,7 @@
 
       <nav class="city-tabs" aria-label="Conteúdo da cidade" role="tablist">
         <button role="tab" aria-selected="true" aria-controls="panel-historias" id="tab-historias" data-tab="historias">Histórias</button>
+        <button role="tab" aria-selected="false" aria-controls="panel-ilustradas" id="tab-ilustradas" data-tab="ilustradas">Edições ilustradas</button>
         <button role="tab" aria-selected="false" aria-controls="panel-herois" id="tab-herois" data-tab="herois">Heróis</button>
         <button role="tab" aria-selected="false" aria-controls="panel-npcs" id="tab-npcs" data-tab="npcs">Habitantes e aliados</button>
       </nav>
@@ -112,6 +113,7 @@
       <div class="city-content" id="cityContent">
         <aside class="chapter-nav" id="chapterNav" aria-label="Navegação dos capítulos"></aside>
         <div class="tab-panel" id="panel-historias" role="tabpanel" aria-labelledby="tab-historias"></div>
+        <div class="tab-panel illustrated-panel" id="panel-ilustradas" role="tabpanel" aria-labelledby="tab-ilustradas" hidden></div>
         <div class="tab-panel people-grid" id="panel-herois" role="tabpanel" aria-labelledby="tab-herois" hidden></div>
         <div class="tab-panel people-grid" id="panel-npcs" role="tabpanel" aria-labelledby="tab-npcs" hidden></div>
       </div>
@@ -121,8 +123,20 @@
   <footer>
     <p>Crônicas de Aurelia · histórias de Gabriel J. Panza</p>
   </footer>
-  <script src="assets/stories.js"></script>
-  <script src="assets/expansions.js"></script>
-  <script src="assets/app.js"></script>
+
+  <dialog class="store-dialog" id="externalStoreDialog" aria-labelledby="storeDialogTitle">
+    <button class="store-dialog__close" id="closeStoreDialog" type="button" aria-label="Fechar aviso">×</button>
+    <p class="eyebrow">Edição ilustrada premium</p>
+    <h2 id="storeDialogTitle">Você está saindo de Crônicas de Aurelia</h2>
+    <p>A próxima página será aberta em uma nova aba na Hotmart para você conhecer e adquirir <strong id="storeEditionName">esta edição ilustrada</strong>.</p>
+    <div class="store-dialog__actions">
+      <button class="button button--quiet" id="cancelStoreLink" type="button">Continuar lendo</button>
+      <a class="button button--store" id="confirmStoreLink" href="https://historias-digitais-ilustradas.hotmart.host/hqs-pagas" target="_blank" rel="noopener noreferrer">Abrir a Hotmart</a>
+    </div>
+  </dialog>
+  <script src="assets/stories.js?v=20261002-novolumes1"></script>
+  <script src="assets/expansions.js?v=20261002-novolumes1"></script>
+  <script src="assets/lore-expansions.js?v=20261002-novolumes1"></script>
+  <script src="assets/app.js?v=20261002-novolumes1"></script>
 </body>
 </html>

@@ -14,8 +14,8 @@ const CITIES = {
     name: "Eldor", region: "Centro arcano · capital comercial", accent: "#4e6795",
     lead: "Torres de obsidiana, pedras preciosas e conhecimento sem limites fizeram de Eldor a joia de Aurelia — e também o palco de sua maior imprudência.",
     atmosphere: "Fantasia arcana", conflict: "Colapso tecnológico e mágico",
-    heroes: [["Os artífices dissidentes", "Inventores", "Percebem que a inovação deixou de servir à cidade e tentam conter o que ajudaram a construir."], ["Defensores de Eldor", "Guardiões", "Protegem civis quando as estruturas de poder e as máquinas deixam de responder."]],
-    npcs: [["Arquimago Eldrin", "Líder do Conselho", "Governante progressista cuja confiança no Aether conduz Eldor a uma era de ouro e a uma crise sem precedentes."], ["Conselho dos Sábios", "Governo arcano", "Mantém a balança de poder e responde pelas escolhas que transformaram magia em tecnologia."], ["Guilda dos Artífices", "Instituição", "Onde engenho, ambição e pesquisa se unem na criação do Aether."]]
+    heroes: [["Orin", "Guerreiro", "Segura a linha de frente com escudo, força e um bracelete de Aether que cobra caro por cada impacto."], ["Mirela", "Conjuradora", "Lê os fluxos do Aether e transforma conhecimento arcano em proteção, cura e uma chance de purificar a rede."], ["Soren", "Ladino", "Infiltra-se nos terminais do Novo Regime e desmonta por dentro as defesas que nenhuma lâmina alcançaria."]],
+    npcs: [["Arquimago Eldrin", "Líder do Conselho", "Governante progressista cuja confiança no Aether conduz Eldor a uma era de ouro e a uma crise sem precedentes."], ["Conselho dos Sábios", "Governo arcano", "Mantém a balança de poder e responde pelas escolhas que transformaram magia em tecnologia."], ["Guilda dos Artífices", "Instituição", "Onde engenho, ambição e pesquisa se unem na criação do Aether."], ["Artífices dissidentes", "Inventores e reparadores", "Percebem que a inovação deixou de servir à cidade e ajudam a conter o que um dia construíram."]]
   },
   ghasthys: {
     name: "Ghasthys", region: "Terras esquecidas · cidade espectral", accent: "#5d806f",
@@ -42,7 +42,7 @@ const CITIES = {
     name: "Celestria", region: "Costa oriental · celeiro de Aurelia", accent: "#6f4f86",
     lead: "Uma terra de colheitas fartas e águas ricas aprende que prosperidade também atrai quem deseja convertê-la em poder, obediência e sacrifício.",
     atmosphere: "Fantasia régia", conflict: "Conspiração e golpe",
-    heroes: [["Rainha Isabel Wrynn", "Soberana e guardiã", "Protege cidade e defensores mesmo quando os próprios mecanismos de proteção são voltados contra o reino."], ["Darian", "Viajante de Ghasthys · guerreiro", "Abre caminho pela cidade sitiada para alcançar o palácio."], ["Seris", "Viajante de Ghasthys · maga", "Lê as correntes de energia dos obeliscos e procura interromper o cerco."], ["Nilo", "Viajante de Ghasthys · ladino", "Usa passagens laterais e brechas que o ataque frontal não alcança."]],
+    heroes: [["Rainha Isabel Wrynn", "Soberana e guardiã", "Protege cidade e defensores mesmo quando os próprios mecanismos de proteção são voltados contra o reino."], ["Orin", "Guerreiro do grupo de Eldor", "Abre caminho pela cidade sitiada e sustenta a linha de frente até que o grupo alcance o palácio."], ["Mirela", "Conjuradora do grupo de Eldor", "Reconhece nas correntes dos obeliscos uma corrupção parecida com aquela que enfrentou na rede de Aether."], ["Soren", "Ladino do grupo de Eldor", "Usa passagens laterais, sabota mecanismos da Irmandade e alcança brechas que um ataque frontal não alcançaria."]],
     npcs: [["Valerius", "Aristocrata", "Ajuda a enfraquecer as defesas e descobre tarde demais que nunca seria senhor do novo regime."], ["Capitão Marek", "Comandante da Guarda", "Veterano do primeiro confronto contra Bane; percebe a infiltração antes que a Irmandade revele seu ritual."], ["Irmandade Escarlate", "Ordem conspiradora", "Transforma obras de proteção em uma rede de extração e cerco."], ["Guarda leal", "Defensores", "Recua até o salão do trono para preservar a última linha de resistência."]]
   },
   dustcreek: {
@@ -87,11 +87,62 @@ const CHRONICLE_ART = {
   sylvaris: ["assets/chronicles/sylvaris.webp", "A cidade viva de Sylvaris construída ao redor da Árvore-Mundo"]
 };
 
+const HOTMART_FALLBACK_URL = "https://historias-digitais-ilustradas.hotmart.host/hqs-pagas";
+const ILLUSTRATED_EDITIONS = {
+  eldor: {
+    access: "public",
+    editions: [{ title: "O Colapso do Aether", pdf: "assets/pdfs/eldor-colapso-aether.pdf?v=2" }]
+  },
+  celestria: {
+    access: "public",
+    editions: [
+      { title: "As Sombras de Celestria", pdf: "assets/pdfs/celestria-sombras.pdf" },
+      { title: "A Coroa e as Correntes", pdf: "assets/pdfs/celestria-coroa-correntes.pdf" }
+    ]
+  },
+  dustcreek: {
+    access: "public",
+    editions: [
+      { title: "A Crônica de DuskCreek", pdf: "assets/pdfs/duskcreek-cronica.pdf" },
+      { title: "O Preço do Retorno", pdf: "assets/pdfs/duskcreek-preco-retorno.pdf" }
+    ]
+  },
+  sylvaris: {
+    access: "public",
+    editions: [
+      { title: "O Lamento de Sylvaris", pdf: "assets/pdfs/sylvaris-lamento.pdf" },
+      { title: "Além do Véu", pdf: "assets/pdfs/sylvaris-alem-do-veu.pdf" }
+    ]
+  },
+  dustywood: { access: "premium", editions: [{ title: "Sussurros em DustyWood", purchaseUrl: "https://pay.hotmart.com/H106190297T?off=jbct8sfw&hotfeature=51" }] },
+  ghasthys: { access: "premium", editions: [{ title: "A Cidade dos Espectros", purchaseUrl: "https://pay.hotmart.com/V106299624T?off=bunazun0&hotfeature=51" }] },
+  glacius: { access: "premium", editions: [{ title: "Os Dez Ecos do Dragão", purchaseUrl: "https://pay.hotmart.com/Q106190674R?off=qosror76&hotfeature=51" }] },
+  califa: {
+    access: "premium",
+    editions: [
+      { title: "O Trono de Sangue de Califa", purchaseUrl: "https://pay.hotmart.com/J107177004O?off=2d1mekur&hotfeature=51" },
+      { title: "As Cinzas de Vera Cruz", purchaseUrl: "https://pay.hotmart.com/H107744749M?off=btb7a2rz&hotfeature=51" }
+    ]
+  }
+};
+
 const el = (id) => document.getElementById(id);
 const slug = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const stories = window.AURELIA_STORIES || [];
 const expansions = window.AURELIA_EXPANSIONS || {};
 let bookStep = 0;
+let pdfReaderModulePromise;
+
+function mountCurrentPdfReader() {
+  const viewer = el("panel-ilustradas")?.querySelector("[data-pdf-viewer]");
+  if (!viewer) return;
+  pdfReaderModulePromise ||= import("./pdf-reader.js");
+  pdfReaderModulePromise.then(module => module.mountPdfReader(viewer)).catch(error => {
+    console.error("Não foi possível carregar o leitor de PDF.", error);
+    const status = viewer.querySelector("[data-pdf-status]");
+    if (status) status.textContent = "Não foi possível carregar este PDF. Use a opção de abrir em tela cheia.";
+  });
+}
 
 function setBookStep(step) {
   bookStep = Math.max(0, Math.min(3, step));
@@ -121,6 +172,73 @@ function personCards(list) {
   return list.map(([name, role, text]) => `<article class="person-card"><h2>${name}</h2><p class="person-role">${role}</p><p>${text}</p></article>`).join("");
 }
 
+function distributeExpansionParagraphs(paragraphs, additions) {
+  if (!additions.length) return [...paragraphs];
+  const insertionPoints = additions.map((_, index) => Math.max(1, Math.round(((index + 1) * paragraphs.length) / (additions.length + 1))));
+  const result = [];
+  paragraphs.forEach((paragraph, index) => {
+    result.push(paragraph);
+    additions.forEach((addition, additionIndex) => {
+      if (insertionPoints[additionIndex] === index + 1) result.push(addition);
+    });
+  });
+  return result;
+}
+
+function illustratedStoryButton(cityId, storyIndex) {
+  const collection = ILLUSTRATED_EDITIONS[cityId];
+  const edition = collection?.editions[storyIndex];
+  if (!collection || !edition) return "";
+  if (collection.access === "public") {
+    return `<button class="illustrated-cta" type="button" data-open-pdf="${storyIndex}"><span aria-hidden="true">▣</span> Ler edição ilustrada</button>`;
+  }
+  return `<button class="illustrated-cta illustrated-cta--premium" type="button" data-open-store="${cityId}" data-edition-index="${storyIndex}"><span aria-hidden="true">✦</span> Conhecer edição ilustrada</button>`;
+}
+
+function publicPdfReader(cityId, selectedIndex = 0) {
+  const collection = ILLUSTRATED_EDITIONS[cityId];
+  const editions = collection?.editions || [];
+  if (!editions.length) return "";
+  const safeIndex = Math.max(0, Math.min(selectedIndex, editions.length - 1));
+  const selected = editions[safeIndex];
+  return `<div class="illustrated-intro"><p class="eyebrow">Leitura gratuita</p><h2>Edições ilustradas de ${CITIES[cityId].name}</h2><p>Leia o PDF completo sem sair do site. Você também pode abrir em tela cheia ou baixar uma cópia para ler depois.</p></div>
+    <div class="edition-selector" role="group" aria-label="Edições ilustradas disponíveis">${editions.map((edition, index) => `<button type="button" class="edition-selector__item${index === safeIndex ? " is-active" : ""}" data-select-pdf="${index}" aria-pressed="${index === safeIndex}"><span>Crônica ${index + 1}</span><strong>${edition.title}</strong></button>`).join("")}</div>
+    <section class="pdf-reader" aria-labelledby="pdfReaderTitle" data-pdf-viewer data-pdf="${selected.pdf}">
+      <div class="pdf-reader__bar"><div><span>Edição ilustrada</span><strong id="pdfReaderTitle">${selected.title}</strong></div><div class="pdf-reader__actions"><a href="${selected.pdf}" target="_blank" rel="noopener" aria-label="Abrir ${selected.title} em uma nova aba">Abrir em tela cheia ↗</a><a href="${selected.pdf}" download>Baixar PDF</a></div></div>
+      <div class="pdf-reader__toolbar" aria-label="Controles do leitor">
+        <button type="button" data-pdf-prev aria-label="Página anterior">←</button>
+        <span data-pdf-page>Página — de —</span>
+        <button type="button" data-pdf-next aria-label="Próxima página">→</button>
+        <span class="pdf-reader__toolbar-spacer"></span>
+        <button type="button" data-pdf-zoom-out aria-label="Diminuir página">−</button>
+        <span data-pdf-zoom>100%</span>
+        <button type="button" data-pdf-zoom-in aria-label="Aumentar página">+</button>
+      </div>
+      <div class="pdf-reader__viewport"><p class="pdf-reader__status" data-pdf-status role="status">Preparando a edição ilustrada…</p><canvas data-pdf-canvas aria-label="Página do PDF"></canvas></div>
+      <p class="pdf-reader__fallback">Se o leitor não aparecer no seu navegador, <a href="${selected.pdf}" target="_blank" rel="noopener">abra o PDF diretamente</a>.</p>
+    </section>`;
+}
+
+function premiumEditionPanel(cityId) {
+  const editions = ILLUSTRATED_EDITIONS[cityId]?.editions || [];
+  return `<section class="premium-edition"><span class="premium-edition__mark" aria-hidden="true">✦</span><p class="eyebrow">Edição ilustrada premium</p><h2>As crônicas de ${CITIES[cityId].name} também ganharam imagens</h2><p>O blog continua disponível gratuitamente em sua versão completa e detalhada. A edição ilustrada é uma alternativa para quem prefere acompanhar a história como uma HQ digital e quer apoiar a produção das próximas crônicas.</p><ul class="premium-edition__products">${editions.map((edition, index) => `<li><span>${edition.title}</span><button class="button button--store" type="button" data-open-store="${cityId}" data-edition-index="${index}">Ver na Hotmart ↗</button></li>`).join("")}</ul><small>Você verá um aviso antes de sair do site.</small></section>`;
+}
+
+function renderIllustratedPanel(cityId, selectedIndex = 0) {
+  const collection = ILLUSTRATED_EDITIONS[cityId];
+  el("panel-ilustradas").innerHTML = collection?.access === "public" ? publicPdfReader(cityId, selectedIndex) : premiumEditionPanel(cityId);
+  if (collection?.access === "public") requestAnimationFrame(mountCurrentPdfReader);
+}
+
+function openStoreDialog(cityId, editionIndex = 0) {
+  const dialog = el("externalStoreDialog");
+  const edition = ILLUSTRATED_EDITIONS[cityId]?.editions?.[editionIndex];
+  el("storeEditionName").textContent = edition?.title || "esta edição ilustrada";
+  el("confirmStoreLink").href = edition?.purchaseUrl || HOTMART_FALLBACK_URL;
+  if (typeof dialog.showModal === "function") dialog.showModal();
+  else dialog.setAttribute("open", "");
+}
+
 function renderCity(id) {
   const city = CITIES[id];
   if (!city) return showMap();
@@ -140,22 +258,23 @@ function renderCity(id) {
   cityStories.forEach((story, storyIndex) => {
     const [artSrc, artAlt] = CHRONICLE_ART[id] || [];
     const art = artSrc ? `<figure class="story-illustration"><img src="${artSrc}" alt="${artAlt}" width="1440" height="810" loading="lazy" decoding="async"></figure>` : "";
-    article.push(`<header class="story-header"><span class="volume-label">${story.volume} · Crônica ${storyIndex + 1}</span><h2>${story.title}</h2><p class="story-deck">${STORY_DECKS[story.title] || "Uma crônica de Aurelia."}</p>${art}</header>`);
+    article.push(`<header class="story-header"><span class="volume-label">Crônica ${storyIndex + 1}</span><h2>${story.title}</h2><p class="story-deck">${STORY_DECKS[story.title] || "Uma crônica de Aurelia."}</p>${illustratedStoryButton(id, storyIndex)}${art}</header>`);
     story.chapters.forEach((chapter, chapterIndex) => {
       const chapterId = `${slug(story.title)}-${chapterIndex + 1}`;
       nav.push(`<button type="button" data-chapter="${chapterId}">${storyIndex + 1}.${chapterIndex + 1} ${chapter.title}</button>`);
-      const paragraphs = [...chapter.paragraphs];
+      let paragraphs = [...chapter.paragraphs];
       const expanded = expansions[story.title]?.[chapterIndex] || [];
-      if (expanded.length) {
-        const insertAt = Math.max(1, Math.floor(paragraphs.length / 3));
-        paragraphs.splice(insertAt, 0, ...expanded);
-      }
+      paragraphs = distributeExpansionParagraphs(paragraphs, expanded);
       if (id === "celestria") {
-        const names = [[/\bA jovem rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba jovem rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA nova rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba nova rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA rainha de Celestria(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba rainha de Celestria(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bRainha Celestina\b/g, "Rainha Isabel Wrynn"], [/\bO guerreiro\b/g, "Darian"], [/\bo guerreiro\b/g, "Darian"], [/\bA maga\b/g, "Seris"], [/\ba maga\b/g, "Seris"], [/\bO ladino\b/g, "Nilo"], [/\bo ladino\b/g, "Nilo"], [/\bO Capitão\b/g, "Capitão Marek"], [/\bo Capitão\b/g, "Capitão Marek"]];
+        const names = [[/\bA jovem rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba jovem rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA nova rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba nova rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA rainha de Celestria(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba rainha de Celestria(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bA rainha(?! Isabel Wrynn)\b/g, "A rainha Isabel Wrynn"], [/\ba rainha(?! Isabel Wrynn)\b/g, "a rainha Isabel Wrynn"], [/\bRainha Celestina\b/g, "Rainha Isabel Wrynn"], [/\bO guerreiro\b/g, "Orin"], [/\bo guerreiro\b/g, "Orin"], [/\bA maga\b/g, "Mirela"], [/\ba maga\b/g, "Mirela"], [/\bO ladino\b/g, "Soren"], [/\bo ladino\b/g, "Soren"], [/\bO Capitão\b/g, "Capitão Marek"], [/\bo Capitão\b/g, "Capitão Marek"]];
         paragraphs.splice(0, paragraphs.length, ...paragraphs.map(paragraph => names.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), paragraph)));
       }
       if (id === "ghasthys") {
         const names = [[/\bO Ladino Scion of the Three\b/g, "Nilo"], [/\bO Ladino\b/g, "Nilo"], [/\bo ladino\b/g, "Nilo"], [/\bA Maga\b/g, "Seris"], [/\ba maga\b/g, "Seris"], [/\bO Guerreiro\b/g, "Darian"], [/\bo guerreiro\b/g, "Darian"]];
+        paragraphs.splice(0, paragraphs.length, ...paragraphs.map(paragraph => names.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), paragraph)));
+      }
+      if (id === "eldor") {
+        const names = [[/\bO Guerreiro do grupo\b/g, "Orin"], [/\bo Guerreiro do grupo\b/g, "Orin"], [/\bO Guerreiro\b/g, "Orin"], [/\bo guerreiro\b/g, "Orin"], [/\bA Conjuradora\b/g, "Mirela"], [/\ba Conjuradora\b/g, "Mirela"], [/\bA conjuradora\b/g, "Mirela"], [/\ba conjuradora\b/g, "Mirela"], [/\bO Ladino\b/g, "Soren"], [/\bo Ladino\b/g, "Soren"], [/\bO ladino\b/g, "Soren"], [/\bo ladino\b/g, "Soren"]];
         paragraphs.splice(0, paragraphs.length, ...paragraphs.map(paragraph => names.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), paragraph)));
       }
       article.push(`<section class="chapter" id="${chapterId}"><span class="chapter-number">Capítulo ${chapterIndex + 1}</span><h3>${chapter.title}</h3>${paragraphs.map(p => `<p>${p}</p>`).join("")}</section>`);
@@ -166,6 +285,7 @@ function renderCity(id) {
   el("cityContent").classList.remove("nav-collapsed");
   el("panel-herois").innerHTML = personCards(city.heroes);
   el("panel-npcs").innerHTML = personCards(city.npcs);
+  renderIllustratedPanel(id);
   selectTab("historias");
   document.title = `${city.name} · Crônicas de Aurelia`;
   window.scrollTo({top: 0});
@@ -182,8 +302,10 @@ function showMap() {
 
 function selectTab(name) {
   document.querySelectorAll("[role=tab]").forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.tab === name)));
-  ["historias", "herois", "npcs"].forEach(tab => el(`panel-${tab}`).hidden = tab !== name);
+  ["historias", "ilustradas", "herois", "npcs"].forEach(tab => el(`panel-${tab}`).hidden = tab !== name);
   el("chapterNav").hidden = name !== "historias";
+  el("cityContent").classList.toggle("illustrated-open", name === "ilustradas");
+  if (name === "ilustradas") requestAnimationFrame(mountCurrentPdfReader);
 }
 
 function route() {
@@ -209,6 +331,36 @@ el("chapterNav").addEventListener("click", event => {
   const button = event.target.closest("[data-chapter]");
   if (!button) return;
   document.getElementById(button.dataset.chapter)?.scrollIntoView({behavior: "smooth", block: "start"});
+});
+el("panel-historias").addEventListener("click", event => {
+  const pdfButton = event.target.closest("[data-open-pdf]");
+  if (pdfButton) {
+    const cityId = location.hash.match(/^#\/cidade\/([a-z]+)$/)?.[1];
+    if (!cityId) return;
+    renderIllustratedPanel(cityId, Number(pdfButton.dataset.openPdf));
+    selectTab("ilustradas");
+    el("panel-ilustradas").scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  const storeButton = event.target.closest("[data-open-store]");
+  if (storeButton) openStoreDialog(storeButton.dataset.openStore, Number(storeButton.dataset.editionIndex || 0));
+});
+el("panel-ilustradas").addEventListener("click", event => {
+  const selector = event.target.closest("[data-select-pdf]");
+  if (selector) {
+    const cityId = location.hash.match(/^#\/cidade\/([a-z]+)$/)?.[1];
+    if (cityId) renderIllustratedPanel(cityId, Number(selector.dataset.selectPdf));
+    return;
+  }
+  const storeButton = event.target.closest("[data-open-store]");
+  if (storeButton) openStoreDialog(storeButton.dataset.openStore, Number(storeButton.dataset.editionIndex || 0));
+});
+const closeStoreDialog = () => el("externalStoreDialog").close?.();
+el("closeStoreDialog").addEventListener("click", closeStoreDialog);
+el("cancelStoreLink").addEventListener("click", closeStoreDialog);
+el("confirmStoreLink").addEventListener("click", closeStoreDialog);
+el("externalStoreDialog").addEventListener("click", event => {
+  if (event.target === el("externalStoreDialog")) closeStoreDialog();
 });
 document.querySelectorAll("[role=tab]").forEach(btn => btn.addEventListener("click", () => selectTab(btn.dataset.tab)));
 document.querySelectorAll("[role=tab]").forEach(btn => btn.addEventListener("keydown", e => {
