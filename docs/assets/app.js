@@ -233,7 +233,9 @@ function renderIllustratedPanel(cityId, selectedIndex = 0) {
 function openStoreDialog(cityId, editionIndex = 0) {
   const dialog = el("externalStoreDialog");
   const edition = ILLUSTRATED_EDITIONS[cityId]?.editions?.[editionIndex];
-  el("storeEditionName").textContent = edition?.title || "esta edição ilustrada";
+  const editionName = edition?.title || "Esta edição ilustrada";
+  const cityName = CITIES[cityId]?.name || "Aurelia";
+  el("storeDialogMessage").innerHTML = `<strong>${editionName}</strong>, de ${cityName}, é uma história ilustrada paga. A compra ajuda a manter o blog gratuito e apoia o desenvolvedor por trás do projeto. Ao continuar, a página da Hotmart será aberta em uma nova aba.`;
   el("confirmStoreLink").href = edition?.purchaseUrl || HOTMART_FALLBACK_URL;
   if (typeof dialog.showModal === "function") dialog.showModal();
   else dialog.setAttribute("open", "");
