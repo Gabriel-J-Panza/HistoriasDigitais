@@ -203,19 +203,18 @@ function publicPdfReader(cityId, selectedIndex = 0) {
   const selected = editions[safeIndex];
   return `<div class="illustrated-intro"><p class="eyebrow">Leitura gratuita</p><h2>Edições ilustradas de ${CITIES[cityId].name}</h2><p>Leia o PDF completo sem sair do site. Você também pode abrir em tela cheia ou baixar uma cópia para ler depois.</p></div>
     <div class="edition-selector" role="group" aria-label="Edições ilustradas disponíveis">${editions.map((edition, index) => `<button type="button" class="edition-selector__item${index === safeIndex ? " is-active" : ""}" data-select-pdf="${index}" aria-pressed="${index === safeIndex}"><span>Crônica ${index + 1}</span><strong>${edition.title}</strong></button>`).join("")}</div>
-    <section class="pdf-reader" aria-labelledby="pdfReaderTitle" data-pdf-viewer data-pdf="${selected.pdf}">
-      <div class="pdf-reader__bar"><div><span>Edição ilustrada</span><strong id="pdfReaderTitle">${selected.title}</strong></div><div class="pdf-reader__actions"><a href="${selected.pdf}" target="_blank" rel="noopener" aria-label="Abrir ${selected.title} em uma nova aba">Abrir em tela cheia ↗</a><a href="${selected.pdf}" download>Baixar PDF</a></div></div>
-      <div class="pdf-reader__toolbar" aria-label="Controles do leitor">
+    <div class="pdf-reader__actions pdf-reader__actions--outside"><a href="${selected.pdf}" target="_blank" rel="noopener" aria-label="Abrir ${selected.title} em uma nova aba">Abrir PDF completo ↗</a><a href="${selected.pdf}" download>Baixar PDF</a></div>
+    <section class="pdf-reader pdf-reader--book" aria-label="Livro ilustrado: ${selected.title}" data-book-reader data-pdf-viewer data-pdf="${selected.pdf}">
+      <div class="pdf-reader__toolbar" aria-label="Controles do livro">
         <button type="button" data-pdf-prev aria-label="Página anterior">←</button>
-        <span data-pdf-page>Página — de —</span>
-        <button type="button" data-pdf-next aria-label="Próxima página">→</button>
+        <span data-pdf-page aria-live="polite">Preparando o livro…</span>
+        <button type="button" data-pdf-next aria-label="Virar página">→</button>
         <span class="pdf-reader__toolbar-spacer"></span>
         <button type="button" data-pdf-zoom-out aria-label="Diminuir página">−</button>
         <span data-pdf-zoom>100%</span>
         <button type="button" data-pdf-zoom-in aria-label="Aumentar página">+</button>
       </div>
-      <div class="pdf-reader__viewport"><p class="pdf-reader__status" data-pdf-status role="status">Preparando a edição ilustrada…</p><canvas data-pdf-canvas aria-label="Página do PDF"></canvas></div>
-      <p class="pdf-reader__fallback">Se o leitor não aparecer no seu navegador, <a href="${selected.pdf}" target="_blank" rel="noopener">abra o PDF diretamente</a>.</p>
+      <div class="pdf-reader__viewport" data-book-page="cover"><div class="pdf-reader__page-frame"><p class="pdf-reader__status" data-pdf-status role="status">Preparando a edição ilustrada…</p><canvas data-pdf-canvas aria-label="Capa da edição ilustrada"></canvas></div></div>
     </section>`;
 }
 
@@ -350,6 +349,7 @@ el("panel-historias").addEventListener("click", event => {
 el("panel-ilustradas").addEventListener("click", event => {
   const selector = event.target.closest("[data-select-pdf]");
   if (selector) {
+    if (selector.classList.contains("is-active")) return;
     const cityId = location.hash.match(/^#\/cidade\/([a-z]+)$/)?.[1];
     if (cityId) renderIllustratedPanel(cityId, Number(selector.dataset.selectPdf));
     return;
