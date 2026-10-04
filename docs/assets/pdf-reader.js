@@ -3,13 +3,77 @@ import * as pdfjsLib from "./vendor/pdfjs/pdf.mjs";
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL("./vendor/pdfjs/pdf.worker.mjs", import.meta.url).href;
 
 const readers = new WeakMap();
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+let activeReader = null;
+
+function defaultBookZoom() {
+  if (window.innerWidth <= 1280) return 1.15;
+  if (window.innerWidth >= 1920) return .85;
+  return 1;
+}
+
+function isPortraitBook() {
+  return window.innerWidth <= 900 && window.innerHeight >= window.innerWidth;
+}
+
+document.addEventListener("keydown", event => {
+  if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.repeat) return;
+  const target = event.target;
+  if (target?.isContentEditable || target?.closest?.("input, textarea, select, [role=tab], [role=dialog]")) return;
+  const direction = event.key === "ArrowLeft" || event.key.toLowerCase() === "a" ? "backward"
+    : event.key === "ArrowRight" || event.key.toLowerCase() === "d" ? "forward" : null;
+  if (!direction || !activeReader?.root.isConnected || activeReader.root.closest("#panel-ilustradas")?.hidden) return;
+  if (activeReader.turnPage(direction)) event.preventDefault();
+});
+
+function halfCanvas(source, side) {
+  const half = document.createElement("canvas");
+  half.width = Math.floor(source.width / 2);
+  half.height = source.height;
+  const x = side === "right" ? source.width - half.width : 0;
+  half.getContext("2d", { alpha: false }).drawImage(source, x, 0, half.width, half.height, 0, 0, half.width, half.height);
+  half.setAttribute("aria-hidden", "true");
+  return half;
+}
+
+function stackedCanvas(source) {
+  const top = halfCanvas(source, "left");
+  const bottom = halfCanvas(source, "right");
+  const stacked = document.createElement("canvas");
+  stacked.width = top.width;
+  stacked.height = top.height + bottom.height;
+  const context = stacked.getContext("2d", { alpha: false });
+  context.drawImage(top, 0, 0);
+  context.drawImage(bottom, 0, top.height);
+  stacked.setAttribute("aria-hidden", "true");
+  return stacked;
+}
+
+function turnSpread(frame, oldPage, newPage, direction) {
+  const backward = direction === "backward";
+  const still = document.createElement("div");
+  still.className = `pdf-reader__still-half pdf-reader__still-half--${backward ? "right" : "left"}`;
+  still.append(halfCanvas(oldPage, backward ? "right" : "left"));
+  const sheet = document.createElement("div");
+  sheet.className = `pdf-reader__turn-sheet pdf-reader__turn-sheet--${direction}`;
+  const front = document.createElement("div");
+  front.className = "pdf-reader__turn-face";
+  front.append(halfCanvas(oldPage, backward ? "left" : "right"));
+  const back = document.createElement("div");
+  back.className = "pdf-reader__turn-face pdf-reader__turn-face--back";
+  back.append(halfCanvas(newPage, backward ? "right" : "left"));
+  sheet.append(front, back);
+  frame.append(still, sheet);
+  let timer;
+  const cleanup = () => { clearTimeout(timer); still.remove(); sheet.remove(); };
+  sheet.addEventListener("animationend", cleanup, { once: true });
+  timer = setTimeout(cleanup, 850);
+  return cleanup;
+}
 
 export async function mountPdfReader(root) {
   const existing = readers.get(root);
-  if (existing) {
-    existing.render();
-    return;
-  }
+  if (existing) { activeReader = { root, turnPage: existing.turnPage }; existing.render(); return; }
 
   const canvas = root.querySelector("[data-pdf-canvas]");
   const status = root.querySelector("[data-pdf-status]");
@@ -20,8 +84,10 @@ export async function mountPdfReader(root) {
   const zoomOut = root.querySelector("[data-pdf-zoom-out]");
   const zoomIn = root.querySelector("[data-pdf-zoom-in]");
   const viewportElement = root.querySelector(".pdf-reader__viewport");
-  const pageFrame = root.querySelector(".pdf-reader__page-frame");
-  const state = { document: null, page: 1, zoom: 1, renderTask: null, renderVersion: 0, resizeTimer: null, turnDirection: "forward", animatePageTurn: false, hasRendered: false, lastViewportSize: "", render: () => {} };
+  const frame = root.querySelector(".pdf-reader__page-frame");
+  const state = { document: null, page: 1, side: "left", zoom: 1, renderTask: null,
+    version: 0, resizeTimer: null, turnCleanup: null, direction: "forward",
+    animate: false, rendered: false, renderedMode: null, lastSize: "", render: () => {} };
   readers.set(root, state);
 
   const updateControls = () => {
@@ -42,56 +108,74 @@ export async function mountPdfReader(root) {
 
   state.render = async () => {
     if (!state.document || root.hidden || root.offsetParent === null) return;
-    const renderVersion = ++state.renderVersion;
+    const version = ++state.version;
     state.renderTask?.cancel();
     const pageNumber = state.page;
     const page = await state.document.getPage(pageNumber);
-    if (state.page !== pageNumber || renderVersion !== state.renderVersion) return;
-    const baseViewport = page.getViewport({ scale: 1 });
-    const viewportStyle = getComputedStyle(viewportElement);
-    const paddingX = parseFloat(viewportStyle.paddingLeft) + parseFloat(viewportStyle.paddingRight);
-    const paddingY = parseFloat(viewportStyle.paddingTop) + parseFloat(viewportStyle.paddingBottom);
-    const availableWidth = Math.max(280, viewportElement.clientWidth - paddingX - 16);
-    const maxPageHeight = Math.max(280, viewportElement.clientHeight - paddingY - 16);
-    const fitScale = Math.min(availableWidth / baseViewport.width, maxPageHeight / baseViewport.height);
-    const cssScale = fitScale * state.zoom;
-    const viewport = page.getViewport({ scale: cssScale });
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    const renderCanvas = document.createElement("canvas");
-    renderCanvas.width = Math.floor(viewport.width * pixelRatio);
-    renderCanvas.height = Math.floor(viewport.height * pixelRatio);
-    const context = renderCanvas.getContext("2d", { alpha: false });
-    const pages = state.document.numPages;
-    const mode = pageNumber === 1 ? "cover" : pageNumber === pages ? "back-cover" : "spread";
-    if (!state.hasRendered) {
-      status.hidden = false;
-      status.textContent = `Carregando página ${pageNumber}…`;
-    }
-    let renderTask;
+    if (version !== state.version) return;
+    const mode = pageNumber === 1 ? "cover" : pageNumber === state.document.numPages ? "back-cover" : "spread";
+    const portraitSpread = mode === "spread" && isPortraitBook();
+    const base = page.getViewport({ scale: 1 });
+    const style = getComputedStyle(viewportElement);
+    const availableWidth = Math.max(180, viewportElement.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - 24);
+    const availableHeight = Math.max(240, viewportElement.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 24);
+    const pageWidth = portraitSpread ? base.width / 2 : base.width;
+    const pageHeight = portraitSpread ? base.height * 2 : base.height;
+    const fitScale = Math.min(availableWidth / pageWidth, availableHeight / pageHeight);
+    const portraitWidth = viewportElement.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - 12;
+    const portraitFitScale = Math.min(portraitWidth / pageWidth, availableHeight / pageHeight);
+    const verticalFitScale = Math.max(0.1, viewportElement.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 12) / pageHeight;
+    const scale = Math.min(fitScale * defaultBookZoom(), portraitSpread ? portraitFitScale : Infinity, verticalFitScale) * state.zoom;
+    const viewport = page.getViewport({ scale });
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const rendered = document.createElement("canvas");
+    rendered.width = Math.max(1, Math.floor(viewport.width * ratio));
+    rendered.height = Math.max(1, Math.floor(viewport.height * ratio));
+    if (!state.rendered) { status.hidden = false; status.textContent = `Carregando página ${pageNumber}…`; }
+    let task;
     try {
-      renderTask = page.render({ canvasContext: context, viewport, transform: pixelRatio === 1 ? null : [pixelRatio, 0, 0, pixelRatio, 0, 0] });
-      state.renderTask = renderTask;
-      await renderTask.promise;
-      if (state.renderTask !== renderTask || state.page !== pageNumber || renderVersion !== state.renderVersion) return;
+      task = page.render({ canvasContext: rendered.getContext("2d", { alpha: false }), viewport,
+        transform: ratio === 1 ? null : [ratio, 0, 0, ratio, 0, 0] });
+      state.renderTask = task;
+      await task.promise;
+      if (state.renderTask !== task || version !== state.version) return;
 
-      if (canvas.width !== renderCanvas.width) canvas.width = renderCanvas.width;
-      if (canvas.height !== renderCanvas.height) canvas.height = renderCanvas.height;
-      canvas.style.width = `${Math.floor(viewport.width)}px`;
-      canvas.style.height = `${Math.floor(viewport.height)}px`;
-      canvas.getContext("2d", { alpha: false }).drawImage(renderCanvas, 0, 0);
-      canvas.hidden = false;
-      viewportElement.dataset.bookPage = mode;
-      canvas.dataset.bookPage = mode;
-      canvas.setAttribute("aria-label", mode === "cover" ? "Capa da edição ilustrada" : mode === "back-cover" ? "Contracapa da edição ilustrada" : `Página ${pageNumber - 1} de ${pages - 2}: arte à esquerda e texto à direita`);
-
-      pageFrame.classList.remove("turn-forward", "turn-backward");
-      if (state.animatePageTurn) {
-        void pageFrame.offsetWidth;
-        pageFrame.classList.add(state.turnDirection === "backward" ? "turn-backward" : "turn-forward");
-        state.animatePageTurn = false;
+      const visible = portraitSpread ? stackedCanvas(rendered) : rendered;
+      const visibleWidth = portraitSpread ? viewport.width / 2 : viewport.width;
+      const visibleHeight = portraitSpread ? viewport.height * 2 : viewport.height;
+      const turn = state.animate && state.rendered && !reducedMotion.matches;
+      const oldPage = turn && state.renderedMode === "spread" && mode === "spread" && !portraitSpread
+        && canvas.width === visible.width && canvas.height === visible.height ? document.createElement("canvas") : null;
+      if (oldPage) {
+        oldPage.width = canvas.width;
+        oldPage.height = canvas.height;
+        oldPage.getContext("2d", { alpha: false }).drawImage(canvas, 0, 0);
       }
-      state.hasRendered = true;
-      state.lastViewportSize = `${viewportElement.clientWidth}x${viewportElement.clientHeight}`;
+      state.turnCleanup?.();
+      state.turnCleanup = null;
+      if (canvas.width !== visible.width) canvas.width = visible.width;
+      if (canvas.height !== visible.height) canvas.height = visible.height;
+      canvas.style.width = `${visibleWidth}px`;
+      canvas.style.height = `${visibleHeight}px`;
+      canvas.getContext("2d", { alpha: false }).drawImage(visible, 0, 0);
+      frame.style.width = `${visibleWidth}px`;
+      frame.style.height = `${visibleHeight}px`;
+      frame.dataset.bookPage = portraitSpread ? "single" : mode;
+      viewportElement.dataset.bookPage = mode;
+      canvas.setAttribute("aria-label", mode === "cover" ? "Capa da edição ilustrada" : mode === "back-cover" ? "Contracapa da edição ilustrada" : portraitSpread ? `Página ${pageNumber - 1}: ilustração acima e texto abaixo` : `Página ${pageNumber - 1} de ${state.document.numPages - 2}: arte à esquerda e texto à direita`);
+      frame.classList.remove("turn-forward", "turn-backward");
+      if (turn) {
+        if (oldPage) state.turnCleanup = turnSpread(frame, oldPage, visible, state.direction);
+        else { void frame.offsetWidth; frame.classList.add(state.direction === "backward" ? "turn-backward" : "turn-forward"); }
+      }
+      state.animate = false;
+      state.rendered = true;
+      state.renderedMode = mode;
+      state.lastSize = `${viewportElement.clientWidth}x${viewportElement.clientHeight}`;
+      if (state.resetView) {
+        viewportElement.scrollTo({ top: 0, left: 0 });
+        state.resetView = false;
+      }
       status.hidden = true;
       updateControls();
     } catch (error) {
@@ -100,24 +184,38 @@ export async function mountPdfReader(root) {
         status.textContent = "Não foi possível desenhar esta página. Tente abrir o PDF em tela cheia.";
         console.error(error);
       }
-    } finally {
-      if (state.renderTask === renderTask) state.renderTask = null;
-    }
+    } finally { if (state.renderTask === task) state.renderTask = null; }
   };
 
-  previous.addEventListener("click", () => { if (state.page > 1) { state.turnDirection = "backward"; state.animatePageTurn = true; state.page--; updateControls(); state.render(); } });
-  next.addEventListener("click", () => { if (state.page < state.document.numPages) { state.turnDirection = "forward"; state.animatePageTurn = true; state.page++; updateControls(); state.render(); } });
-  zoomOut.addEventListener("click", () => { state.zoom = Math.max(.65, state.zoom - .15); state.render(); });
-  zoomIn.addEventListener("click", () => { state.zoom = Math.min(1.8, state.zoom + .15); state.render(); });
+  const turnPage = direction => {
+    const last = state.document?.numPages || 0;
+    if (!last) return false;
+    if (direction === "forward") {
+      if (state.page < last) { state.page++; state.side = "left"; }
+      else return false;
+    } else if (state.page > 1) { state.page--; state.side = "left"; }
+    else return false;
+    state.direction = direction;
+    state.animate = true;
+    state.resetView = true;
+    updateControls();
+    state.render();
+    return true;
+  };
+  state.turnPage = turnPage;
+  activeReader = { root, turnPage };
+  previous.addEventListener("click", () => turnPage("backward"));
+  next.addEventListener("click", () => turnPage("forward"));
+  zoomOut.addEventListener("click", () => { state.zoom = Math.max(.65, Math.round((state.zoom - .15) * 100) / 100); state.resetView = true; state.render(); });
+  zoomIn.addEventListener("click", () => { state.zoom = Math.min(1.8, Math.round((state.zoom + .15) * 100) / 100); state.resetView = true; state.render(); });
 
   const observer = new ResizeObserver(() => {
     if (!state.document) return;
-    const currentSize = `${viewportElement.clientWidth}x${viewportElement.clientHeight}`;
-    if (currentSize === state.lastViewportSize) return;
+    const size = `${viewportElement.clientWidth}x${viewportElement.clientHeight}`;
+    if (size === state.lastSize) return;
     clearTimeout(state.resizeTimer);
     state.resizeTimer = setTimeout(() => {
-      const settledSize = `${viewportElement.clientWidth}x${viewportElement.clientHeight}`;
-      if (settledSize !== state.lastViewportSize) state.render();
+      if (`${viewportElement.clientWidth}x${viewportElement.clientHeight}` !== state.lastSize) state.render();
     }, 140);
   });
   observer.observe(viewportElement);

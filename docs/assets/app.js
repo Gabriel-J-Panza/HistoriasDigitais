@@ -136,7 +136,7 @@ let pdfReaderModulePromise;
 function mountCurrentPdfReader() {
   const viewer = el("panel-ilustradas")?.querySelector("[data-pdf-viewer]");
   if (!viewer) return;
-  pdfReaderModulePromise ||= import("./pdf-reader.js");
+  pdfReaderModulePromise ||= import("./pdf-reader.js?v=20261004-livrosembarra4");
   pdfReaderModulePromise.then(module => module.mountPdfReader(viewer)).catch(error => {
     console.error("Não foi possível carregar o leitor de PDF.", error);
     const status = viewer.querySelector("[data-pdf-status]");
@@ -203,19 +203,18 @@ function publicPdfReader(cityId, selectedIndex = 0) {
   const selected = editions[safeIndex];
   return `<div class="illustrated-intro"><p class="eyebrow">Leitura gratuita</p><h2>Edições ilustradas de ${CITIES[cityId].name}</h2><p>Leia o PDF completo sem sair do site. Você também pode abrir em tela cheia ou baixar uma cópia para ler depois.</p></div>
     <div class="edition-selector" role="group" aria-label="Edições ilustradas disponíveis">${editions.map((edition, index) => `<button type="button" class="edition-selector__item${index === safeIndex ? " is-active" : ""}" data-select-pdf="${index}" aria-pressed="${index === safeIndex}"><span>Crônica ${index + 1}</span><strong>${edition.title}</strong></button>`).join("")}</div>
-    <div class="pdf-reader__actions pdf-reader__actions--outside"><a href="${selected.pdf}" target="_blank" rel="noopener" aria-label="Abrir ${selected.title} em uma nova aba">Abrir PDF completo ↗</a><a href="${selected.pdf}" download>Baixar PDF</a></div>
-    <section class="pdf-reader pdf-reader--book" aria-label="Livro ilustrado: ${selected.title}" data-book-reader data-pdf-viewer data-pdf="${selected.pdf}">
-      <div class="pdf-reader__toolbar" aria-label="Controles do livro">
-        <button type="button" data-pdf-prev aria-label="Página anterior">←</button>
-        <span data-pdf-page aria-live="polite">Preparando o livro…</span>
-        <button type="button" data-pdf-next aria-label="Virar página">→</button>
-        <span class="pdf-reader__toolbar-spacer"></span>
-        <button type="button" data-pdf-zoom-out aria-label="Diminuir página">−</button>
-        <span data-pdf-zoom>100%</span>
-        <button type="button" data-pdf-zoom-in aria-label="Aumentar página">+</button>
-      </div>
-      <div class="pdf-reader__viewport" data-book-page="cover"><div class="pdf-reader__page-frame"><p class="pdf-reader__status" data-pdf-status role="status">Preparando a edição ilustrada…</p><canvas data-pdf-canvas aria-label="Capa da edição ilustrada"></canvas></div></div>
-    </section>`;
+    <div class="illustrated-book-reader" data-pdf-viewer data-pdf="${selected.pdf}">
+      <div class="pdf-reader__actions pdf-reader__actions--outside"><a href="${selected.pdf}" target="_blank" rel="noopener" aria-label="Abrir ${selected.title} em uma nova aba">Abrir PDF completo ↗</a><a href="${selected.pdf}" download>Baixar PDF</a></div>
+      <section class="pdf-reader pdf-reader--book" aria-label="Livro ilustrado: ${selected.title}" data-book-reader>
+        <div class="pdf-reader__viewport" data-book-page="cover">
+          <div class="pdf-reader__page-frame" data-book-page="cover"><canvas data-pdf-canvas aria-label="Capa da edição ilustrada"></canvas></div>
+          <p class="pdf-reader__status" data-pdf-status role="status">Preparando a edição ilustrada…</p>
+          <button class="pdf-reader__page-nav pdf-reader__page-nav--prev" type="button" data-pdf-prev aria-label="Página anterior">←</button>
+          <button class="pdf-reader__page-nav pdf-reader__page-nav--next" type="button" data-pdf-next aria-label="Virar página">→</button>
+        </div>
+      </section>
+      <div class="pdf-reader__toolbar" aria-label="Controles do livro"><span data-pdf-page aria-live="polite">Preparando o livro…</span><div class="pdf-reader__zoom"><button type="button" data-pdf-zoom-out aria-label="Diminuir página">−</button><span data-pdf-zoom>100%</span><button type="button" data-pdf-zoom-in aria-label="Aumentar página">+</button></div></div>
+    </div>`;
 }
 
 function premiumEditionPanel(cityId) {
