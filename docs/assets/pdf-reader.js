@@ -12,6 +12,10 @@ function defaultBookZoom() {
   return 1;
 }
 
+function initialReaderZoom() {
+  return window.innerWidth > 1280 && window.innerWidth <= 1600 ? 1.15 : 1;
+}
+
 function isPortraitBook() {
   return window.innerWidth <= 900 && window.innerHeight >= window.innerWidth;
 }
@@ -77,7 +81,11 @@ export async function mountPdfReader(root) {
 
   const canvas = root.querySelector("[data-pdf-canvas]");
   const status = root.querySelector("[data-pdf-status]");
-  const pageLabel = root.querySelector("[data-pdf-page]");
+  const pageLoading = root.querySelector("[data-pdf-page-loading]");
+  const pagePicker = root.querySelector("[data-pdf-page-picker]");
+  const pagePrefix = root.querySelector("[data-pdf-page-prefix]");
+  const pageSelect = root.querySelector("[data-pdf-page-select]");
+  const pageTotal = root.querySelector("[data-pdf-page-total]");
   const zoomLabel = root.querySelector("[data-pdf-zoom]");
   const previous = root.querySelector("[data-pdf-prev]");
   const next = root.querySelector("[data-pdf-next]");
@@ -85,18 +93,30 @@ export async function mountPdfReader(root) {
   const zoomIn = root.querySelector("[data-pdf-zoom-in]");
   const viewportElement = root.querySelector(".pdf-reader__viewport");
   const frame = root.querySelector(".pdf-reader__page-frame");
-  const state = { document: null, page: 1, side: "left", zoom: 1, renderTask: null,
+  const state = { document: null, page: 1, side: "left", zoom: initialReaderZoom(), renderTask: null,
     version: 0, resizeTimer: null, turnCleanup: null, direction: "forward",
     animate: false, rendered: false, renderedMode: null, lastSize: "", render: () => {} };
   readers.set(root, state);
 
+  const populatePageOptions = pages => {
+    const options = document.createDocumentFragment();
+    for (let page = 1; page <= pages; page++) {
+      const label = page === 1 ? "Capa" : page === pages ? "Contracapa" : String(page - 1);
+      options.append(new Option(label, String(page)));
+    }
+    pageSelect.replaceChildren(options);
+  };
+
   const updateControls = () => {
     const pages = state.document?.numPages || 0;
     const storyPages = Math.max(0, pages - 2);
-    if (!pages) pageLabel.textContent = "Preparando o livro…";
-    else if (state.page === 1) pageLabel.textContent = "Capa · abrir o livro";
-    else if (state.page === pages) pageLabel.textContent = "Contracapa · fim da história";
-    else pageLabel.textContent = `Página ${state.page - 1} de ${storyPages}`;
+    pageLoading.hidden = Boolean(pages);
+    pagePicker.hidden = !pages;
+    if (pages) {
+      pageSelect.value = String(state.page);
+      pagePrefix.textContent = state.page > 1 && state.page < pages ? "Página" : "";
+      pageTotal.textContent = state.page === 1 ? "· abrir o livro" : state.page === pages ? "· fim da história" : `de ${storyPages}`;
+    }
     zoomLabel.textContent = `${Math.round(state.zoom * 100)}%`;
     previous.disabled = !pages || state.page <= 1;
     next.disabled = !pages || state.page >= pages;
@@ -206,6 +226,16 @@ export async function mountPdfReader(root) {
   activeReader = { root, turnPage };
   previous.addEventListener("click", () => turnPage("backward"));
   next.addEventListener("click", () => turnPage("forward"));
+  pageSelect.addEventListener("change", () => {
+    const page = Number(pageSelect.value);
+    if (!Number.isInteger(page) || page < 1 || page > (state.document?.numPages || 0) || page === state.page) return;
+    state.page = page;
+    state.side = "left";
+    state.animate = false;
+    state.resetView = true;
+    updateControls();
+    state.render();
+  });
   zoomOut.addEventListener("click", () => { state.zoom = Math.max(.65, Math.round((state.zoom - .15) * 100) / 100); state.resetView = true; state.render(); });
   zoomIn.addEventListener("click", () => { state.zoom = Math.min(1.8, Math.round((state.zoom + .15) * 100) / 100); state.resetView = true; state.render(); });
 
@@ -224,6 +254,7 @@ export async function mountPdfReader(root) {
   try {
     const source = new URL(root.dataset.pdf, document.baseURI).href;
     state.document = await pdfjsLib.getDocument({ url: source }).promise;
+    populatePageOptions(state.document.numPages);
     updateControls();
     await state.render();
   } catch (error) {

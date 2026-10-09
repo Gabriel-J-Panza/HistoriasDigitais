@@ -91,7 +91,7 @@ const HOTMART_FALLBACK_URL = "https://historias-digitais-ilustradas.hotmart.host
 const ILLUSTRATED_EDITIONS = {
   eldor: {
     access: "public",
-    editions: [{ title: "O Colapso do Aether", pdf: "assets/pdfs/eldor-colapso-aether.pdf?v=2" }]
+    editions: [{ title: "O Colapso do Aether", pdf: "assets/pdfs/eldor-colapso-aether.pdf?v=3" }]
   },
   celestria: {
     access: "public",
@@ -136,7 +136,7 @@ let pdfReaderModulePromise;
 function mountCurrentPdfReader() {
   const viewer = el("panel-ilustradas")?.querySelector("[data-pdf-viewer]");
   if (!viewer) return;
-  pdfReaderModulePromise ||= import("./pdf-reader.js?v=20261004-livrosembarra4");
+  pdfReaderModulePromise ||= import("./pdf-reader.js?v=20261009-pagepicker1");
   pdfReaderModulePromise.then(module => module.mountPdfReader(viewer)).catch(error => {
     console.error("Não foi possível carregar o leitor de PDF.", error);
     const status = viewer.querySelector("[data-pdf-status]");
@@ -213,7 +213,7 @@ function publicPdfReader(cityId, selectedIndex = 0) {
           <button class="pdf-reader__page-nav pdf-reader__page-nav--next" type="button" data-pdf-next aria-label="Virar página">→</button>
         </div>
       </section>
-      <div class="pdf-reader__toolbar" aria-label="Controles do livro"><span data-pdf-page aria-live="polite">Preparando o livro…</span><div class="pdf-reader__zoom"><button type="button" data-pdf-zoom-out aria-label="Diminuir página">−</button><span data-pdf-zoom>100%</span><button type="button" data-pdf-zoom-in aria-label="Aumentar página">+</button></div></div>
+      <div class="pdf-reader__toolbar" aria-label="Controles do livro"><div class="pdf-reader__page-control"><span data-pdf-page-loading>Preparando o livro…</span><div class="pdf-reader__page-picker" data-pdf-page-picker hidden><span data-pdf-page-prefix></span><select data-pdf-page-select aria-label="Ir para uma página específica"></select><span data-pdf-page-total></span></div></div><div class="pdf-reader__zoom"><button type="button" data-pdf-zoom-out aria-label="Diminuir página">−</button><span data-pdf-zoom>100%</span><button type="button" data-pdf-zoom-in aria-label="Aumentar página">+</button></div></div>
     </div>`;
 }
 
