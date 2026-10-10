@@ -34,10 +34,6 @@ window.AURELIA_EXPANSIONS = {
     0: [
       "A subida para Glacius consumiu mais tempo do que os mapas prometiam. Nevascas apagavam as trilhas em minutos, e Elian precisava aquecer as pedras sem derreter a camada que sustentava o grupo. Lyra registrava direção, vento e duração de cada parada, enquanto Kael seguia adiante preso por uma corda. Quando avistaram as muralhas brancas, já entendiam que o gelo não era apenas cenário: era uma força que punia qualquer decisão apressada.",
       "Na primeira noite, os três discutiram o significado de purificar em vez de destruir. Kael perguntou por que não quebrariam os cristais antes que Crystalix os usasse novamente. Lyra abriu seus registros e mostrou que cada eco também preservava parte da terra ao redor. Elian concluiu que destruí-los poderia silenciar a corrupção e a própria vida de Glacius. A missão exigiria enfrentar cada domínio sem tratar o poder que o sustentava como inimigo."
-    ],
-    4: [
-      "Antes de atravessar o portal temporal, Lyra fez os companheiros repetirem em voz alta aquilo que sabiam ser verdadeiro: os cristais já recuperados, o lugar de onde vinham e os nomes uns dos outros. Parecia um ritual simples diante do que os aguardava, mas serviria de âncora quando passado e futuro tentassem reescrever suas escolhas. Kael brincou que jamais imaginara vencer uma batalha decorando anotações. Elian respondeu que algumas armaduras eram feitas de memória.",
-      "Quando o décimo eco finalmente silenciou, ninguém comemorou de imediato. Os três aguardaram para ver se a neve voltaria a cair de modo natural e se a luz dos cristais permaneceria estável. Só então Lyra fechou o caderno. Kael observou a primeira erva atravessar a cinza, e Elian sentiu o fluxo mágico se distribuir sem violência. A vitória não era o clarão do último golpe, mas o retorno de pequenos movimentos que já não precisavam deles."
     ]
   },
   "O Trono de Sangue de Califa": {

@@ -15,7 +15,7 @@ const CITIES = {
     lead: "Torres de obsidiana, pedras preciosas e conhecimento sem limites fizeram de Eldor a joia de Aurelia — e também o palco de sua maior imprudência.",
     atmosphere: "Fantasia arcana", conflict: "Colapso tecnológico e mágico",
     heroes: [["Orin", "Guerreiro", "Segura a linha de frente com escudo, força e um bracelete de Aether que cobra caro por cada impacto."], ["Mirela", "Conjuradora", "Lê os fluxos do Aether e transforma conhecimento arcano em proteção, cura e uma chance de purificar a rede."], ["Soren", "Ladino", "Infiltra-se nos terminais do Novo Regime e desmonta por dentro as defesas que nenhuma lâmina alcançaria."]],
-    npcs: [["Arquimago Eldrin", "Líder do Conselho", "Governante progressista cuja confiança no Aether conduz Eldor a uma era de ouro e a uma crise sem precedentes."], ["Conselho dos Sábios", "Governo arcano", "Mantém a balança de poder e responde pelas escolhas que transformaram magia em tecnologia."], ["Guilda dos Artífices", "Instituição", "Onde engenho, ambição e pesquisa se unem na criação do Aether."], ["Artífices dissidentes", "Inventores e reparadores", "Percebem que a inovação deixou de servir à cidade e ajudam a conter o que um dia construíram."]]
+    npcs: [["Arquimago Eldrin", "Líder do Conselho", "Governante progressista cuja confiança no Aether conduz Eldor a uma era de ouro e a uma crise sem precedentes."], ["Conselho dos Sábios", "Governo arcano", "Mantém a balança de poder e responde pelas escolhas que transformaram magia em tecnologia."], ["Guilda dos Artífices", "Instituição", "Onde engenho, ambição e pesquisa se unem na criação do Aether."], ["Artífices dissidentes", "Inventores e reparadores", "Percebem que a inovação deixou de servir à cidade e ajudam a conter o que um dia construíram."], ["Iria", "Artífice dos bairros baixos", "Conserta bombas e equipamentos civis, acompanha os reparos de Eldor e cobra limites para a ajuda enviada a Califa."]]
   },
   ghasthys: {
     name: "Ghasthys", region: "Terras esquecidas · cidade espectral", accent: "#5d806f",
@@ -64,6 +64,7 @@ const CITIES = {
 const STORY_DECKS = {
   "Sussurros em DustyWood": "Famílias somem durante a noite, e três aventureiros seguem pistas que a cidade preferia manter enterradas.",
   "O Colapso do Aether": "A grande invenção de Eldor começa a sair do controle — e seus criadores precisam encarar o estrago.",
+  "O Peso da Luz": "Enquanto reconstrói sua própria cidade, Eldor envia ajuda a Califa e precisa responder pelos limites e pelo destino de sua tecnologia.",
   "A Cidade dos Espectros": "Em Ghasthys, os mortos continuam por perto e cada rua parece guardar uma versão diferente do passado.",
   "Os Dez Ecos do Dragão": "Dez cristais corrompidos, dez lugares perigosos e uma jornada que não perdoa decisões apressadas.",
   "O Trono de Sangue de Califa": "As Sete Casas tentam retomar Vera Cruz sem repetir a violência que derrubou o antigo reino.",
@@ -91,7 +92,10 @@ const HOTMART_FALLBACK_URL = "https://historias-digitais-ilustradas.hotmart.host
 const ILLUSTRATED_EDITIONS = {
   eldor: {
     access: "public",
-    editions: [{ title: "O Colapso do Aether", pdf: "assets/pdfs/eldor-colapso-aether.pdf?v=3" }]
+    editions: [
+      { title: "O Colapso do Aether", pdf: "assets/pdfs/eldor-colapso-aether.pdf?v=5" },
+      { title: "O Peso da Luz", pdf: "assets/pdfs/eldor-peso-da-luz.pdf?v=1" }
+    ]
   },
   celestria: {
     access: "public",
