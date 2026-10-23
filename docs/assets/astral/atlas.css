@@ -1,0 +1,80 @@
+.astral-view { padding: 1rem clamp(.75rem, 2vw, 2rem); color: var(--ink); min-height: calc(100svh - 74px); display: grid; place-items: center; }
+.astral-view h1:focus, .astral-view h2[tabindex]:focus { outline: none; }
+.astral-unfold { position: relative; width: min(1540px, 100%); filter: drop-shadow(0 24px 35px #0007); animation: astral-unfold .8s cubic-bezier(.2,.7,.2,1) both; }
+.astral-layout { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(275px, 330px); border: 10px solid #51351f; border-radius: 6px; background: #e5cca0; }
+.astral-map-section { min-width: 0; padding: .8rem 1rem .3rem; background: radial-gradient(ellipse at 35% 30%,#f8ebca,#dfc18c); }
+.astral-sheet { position: relative; min-width: 0; background: radial-gradient(ellipse at 65% 25%,#f8ebca,#dfc18c); padding: clamp(1.1rem, 2vw, 2rem); box-shadow: inset 17px 0 25px #45281024; max-height: calc(100svh - 128px); overflow-y: auto; scrollbar-color: #a28a61 transparent; }
+.astral-sheet::before { content:''; position:absolute; left:0; top:0; bottom:0; width:12px; background:linear-gradient(90deg,#4d301c38,#fff6d34d,transparent); pointer-events:none; }
+.astral-sheet header h1 { margin:.3rem 0 .7rem; font-size:clamp(2rem,3.2vw,3rem); line-height:1; font-weight:400; letter-spacing:-.035em; }
+.astral-sheet header > p:last-child { font-size:.93rem; line-height:1.5; margin:0 0 1.1rem; }
+.astral-sheet .eyebrow, .astral-map-section .eyebrow { color:var(--gold-dark); font-size:.66rem; margin:0; }
+.astral-map-tools { display:flex; align-items:center; justify-content:space-between; gap:.5rem; flex-wrap:wrap; font:600 .75rem/1.4 var(--sans); min-height:36px; }
+.astral-map-tools label { display:flex; align-items:center; gap:.35rem; min-height:40px; cursor:pointer; }
+.astral-map-tools input { width:18px; height:18px; accent-color:#88682d; }
+.astral-map-tools button, .astral-actions button { border:1px solid #88682d80; border-radius:999px; color:#513822; background:transparent; min-height:36px; padding:.3rem .65rem; cursor:pointer; font:600 .73rem/1.5 var(--sans); }
+.astral-map-tools button:hover, .astral-actions button:hover, .astral-actions button[aria-pressed=true] { background:#d2b27c; border-color:#684820; }
+.astral-map-tools button:disabled { opacity:.4; cursor:default; }
+.astral-zoom { display:flex; align-items:center; gap:.35rem; }
+.astral-zoom output { min-width:3rem; text-align:center; }
+.astral-map-viewport { height:calc(100svh - 244px); min-height:360px; max-height:850px; overflow:auto; border:1px solid #8a7353; background:#090d16; position:relative; overscroll-behavior:contain; scrollbar-color:#9a8052 #15100c; scroll-margin-top:100px; }
+.astral-map-tools--bottom { margin-top:.5rem; }
+.astral-route-status { margin:.3rem 0; min-height:1.4em; font:.72rem/1.4 var(--sans); color:#6b5231; }
+.astral-destination { border-top:1px solid var(--line); padding-top:1rem; scroll-margin-top:90px; }
+.astral-destination h2 { font-size:1.5rem; line-height:1.15; font-weight:400; margin:.4rem 0 .65rem; }
+.astral-destination > p:not(.eyebrow) { font-size:.88rem; line-height:1.55; }
+.astral-book { border-top:1px solid var(--line); padding:.75rem 0; }
+.astral-book h3 { font-size:1.08rem; font-weight:400; line-height:1.2; margin:0 0 .5rem; }
+.astral-actions { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
+.astral-actions a { color:var(--rust); font:700 .73rem/1.5 var(--sans); text-underline-offset:.2em; padding:.3rem 0; }
+.astral-close { display:inline-block; margin-top:1rem; color:#6b4c28; font:600 .75rem var(--sans); min-height:36px; }
+.astral-story-index { border-top:1px solid var(--line); margin-top:1rem; padding-top:.65rem; }
+.astral-story-index summary { cursor:pointer; font:700 .74rem/1.6 var(--sans); color:#705128; min-height:36px; }
+.astral-unvisited { color:#705f48; }
+.astral-view button:focus-visible, .astral-view a:focus-visible, .astral-map-viewport:focus-visible, .astral-view summary:focus-visible { outline:2px solid var(--rust); outline-offset:3px; }
+.astral-view--story { display:block; padding:0; background:var(--paper); }
+.astral-view--story > .city-masthead { width:100%; }
+.astral-view--story .city-masthead h1 { font-size:clamp(3rem,8vw,6.5rem); max-width:15ch; }
+.astral-back { color:var(--gold); font:600 .85rem var(--sans); display:inline-block; padding:.5rem 0; }
+.astral-reading__status { color:#79674d; font:.8rem var(--sans); }
+.astral-story-pagination { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:1.5rem; font:.9rem var(--sans); color:var(--rust); }
+.atlas-future__astral-link { display:inline-flex; margin-top:.8rem; padding:.55rem 1rem; border:1px solid #88682d; border-radius:999px; text-decoration:none; font:600 .85rem/1.5 var(--sans); }
+@keyframes astral-unfold { from { opacity:0; transform:translateX(7vw) scaleX(.82); transform-origin:right center; } 40% { opacity:1; } to { opacity:1; transform:translateX(0) scaleX(1); } }
+html:active-view-transition-type(astral-open)::view-transition-old(atlas-book) { animation:astral-book-slide .65s ease both; }
+html:active-view-transition-type(astral-open)::view-transition-new(astral-map) { animation:astral-unfold .75s ease both; }
+@keyframes astral-book-slide { to { transform:translateX(-22vw) rotate(-4deg) scale(.84); opacity:0; } }
+#atlasStage { view-transition-name:atlas-book; }
+.astral-unfold { view-transition-name:astral-map; }
+@media (max-width:759px) {
+  .astral-view { padding:.7rem; display:block; }
+  .astral-layout { grid-template-columns:1fr; border-width:7px; }
+  .astral-map-section { padding:.6rem; }
+  .astral-map-viewport { height:auto; min-height:0; max-height:none; aspect-ratio:1309 / 1202; }
+  .astral-sheet { max-height:none; border-top:1px solid #9d8053; padding:1.5rem; box-shadow:inset 0 12px 22px #45281020; }
+  .astral-sheet::before { top:0; left:0; right:0; width:auto; height:10px; bottom:auto; background:linear-gradient(#4d301c38,#fff6d34d,transparent); }
+  .astral-sheet header h1 { font-size:2.3rem; }
+  .astral-map-tools button, .astral-actions button, .astral-actions a { min-height:44px; }
+  .astral-view--story { padding:0; }
+}
+@media (prefers-reduced-motion:reduce) { .astral-unfold { animation:none; } ::view-transition-old(*), ::view-transition-new(*) { animation:none!important; } }
+
+.astral-world { position: relative; width: 100%; aspect-ratio: 1309 / 1202; min-height: 0; margin-inline: auto; }
+.astral-world > img { display: block; width: 100%; height: auto; }
+.astral-route, .astral-pins { position: absolute; inset: 0; width: 100%; height: 100%; }
+.astral-route { pointer-events: none; }
+.astral-route polyline { fill: none; stroke: #ffdc80; stroke-width: .3; stroke-dasharray: .9 .6; filter: drop-shadow(0 0 1px #000); }
+.astral-route circle { fill: #fff1bd; stroke: #3d2600; stroke-width: .15; }
+.astral-view .astral-pin { position: absolute; transform: translate(-50%, -50%); width: 44px; height: 44px; min-height: 44px; padding: 0; display: grid; place-items: center; border: none; border-radius: 50%; background: transparent; }
+.astral-pin__dot { width: 17px; height: 17px; border: 2px solid #ffe4a0; background: #182338; border-radius: 50%; box-shadow: 0 0 0 3px #10151eaa; }
+.astral-view .astral-pin:hover, .astral-view .astral-pin[aria-pressed="true"] { background: #ecc77b44; }
+.astral-pin[aria-pressed="true"] .astral-pin__dot { background: #ffe4a0; }
+.astral-pin__label { display: none; position: absolute; top: 39px; left: 50%; transform: translateX(-50%); background: #090e19eb; padding: .15rem .35rem; border: 1px solid #857246; color: #fff0c9; font: 600 12px/1.3 var(--sans); width: max-content; max-width: 145px; pointer-events: none; text-align: center; }
+.show-labels .astral-pin__label, .astral-pin:hover .astral-pin__label, .astral-pin:focus-visible .astral-pin__label { display: block; }
+.astral-pin:hover, .astral-pin:focus-visible { z-index: 3; }
+.astral-pin[data-spot="desert"] .astral-pin__label,
+.astral-pin[data-spot="dark-fire"] .astral-pin__label,
+.astral-pin[data-spot="arkhan"] .astral-pin__label,
+.astral-pin[data-spot="mushroom"] .astral-pin__label,
+.astral-pin[data-spot="quartz-reef"] .astral-pin__label { top: auto; bottom: 39px; }
+.astral-pin[data-spot="weeping"] .astral-pin__label { top: auto; bottom: 55px; left: calc(50% + 50px); }
+.astral-pin[data-spot="quartz-reef"] .astral-pin__label { bottom: 45px; }
+

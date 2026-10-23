@@ -169,7 +169,7 @@ function setBookStep(step) {
 }
 
 function renderLegend() {
-  el("mapLegend").innerHTML = Object.entries(CITIES).map(([id, c]) => `<a href="#/cidade/${id}">${c.name}</a>`).join("");
+  el("mapLegend").innerHTML = Object.entries(CITIES).map(([id, c]) => `<a href="#/cidade/${id}">${c.name}</a>`).join("") + '<a href="#/astral">Plano Astral ↗</a>';
 }
 
 function personCards(list) {
@@ -233,11 +233,16 @@ function renderIllustratedPanel(cityId, selectedIndex = 0) {
 }
 
 function openStoreDialog(cityId, editionIndex = 0) {
-  const dialog = el("externalStoreDialog");
   const edition = ILLUSTRATED_EDITIONS[cityId]?.editions?.[editionIndex];
+  openIllustratedStoreDialog(edition, CITIES[cityId]?.name || "Aurelia");
+}
+
+function openIllustratedStoreDialog(edition, collectionName) {
+  const dialog = el("externalStoreDialog");
   const editionName = edition?.title || "Esta edição ilustrada";
-  const cityName = CITIES[cityId]?.name || "Aurelia";
-  el("storeDialogMessage").innerHTML = `<strong>${editionName}</strong>, de ${cityName}, é uma história ilustrada paga. A compra ajuda a manter o blog gratuito e apoia o desenvolvedor por trás do projeto. Ao continuar, a página da Hotmart será aberta em uma nova aba.`;
+  const title = document.createElement("strong");
+  title.textContent = editionName;
+  el("storeDialogMessage").replaceChildren(title, `, de ${collectionName}, é uma história ilustrada paga. A compra ajuda a manter o blog gratuito e apoia o desenvolvedor por trás do projeto. Ao continuar, a página da Hotmart será aberta em uma nova aba.`);
   el("confirmStoreLink").href = edition?.purchaseUrl || HOTMART_FALLBACK_URL;
   if (typeof dialog.showModal === "function") dialog.showModal();
   else dialog.setAttribute("open", "");
@@ -313,11 +318,20 @@ function selectTab(name) {
 }
 
 function route() {
+  if (window.AstralAtlas?.matches(location.hash)) {
+    window.AstralAtlas.render();
+    return;
+  }
+  window.AstralAtlas?.hide();
   const match = location.hash.match(/^#\/cidade\/([a-z]+)$/);
   match ? renderCity(match[1]) : showMap();
 }
 
-el("homeButton").addEventListener("click", () => { setBookStep(2); location.hash = "#/"; });
+el("homeButton").addEventListener("click", () => {
+  if (location.hash.startsWith("#/astral/historia/")) { location.hash = "#/astral"; return; }
+  setBookStep(location.hash.startsWith("#/astral") ? 3 : 2);
+  location.hash = "#/";
+});
 document.querySelector(".wordmark").addEventListener("click", () => setBookStep(0));
 el("openBook").addEventListener("click", () => setBookStep(1));
 el("bookPrev").addEventListener("click", () => setBookStep(bookStep - 1));
