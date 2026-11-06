@@ -28,7 +28,7 @@ const CITIES = {
     name: "Glacius", region: "Cordilheira do norte · reino de gelo", accent: "#5689a9",
     lead: "Dez cristais guardam ecos de um deus-dragão. Quando todos são corrompidos, três viajantes atravessam reinos quebrados para impedir que a malícia desperte algo maior.",
     atmosphere: "Jornada épica", conflict: "Dez cristais corrompidos",
-    heroes: [["Kael", "Guerreiro", "Força inabalável que sustenta a expedição quando cada cristal transforma o terreno e seus guardiões."], ["Lyra", "Escriba", "Conhecimento, leitura e memória permitem compreender os ecos antes de tentar purificá-los."], ["Elian", "Mago", "Sente o fluxo mágico dos cristais e reconhece quando a força bruta alimentaria a corrupção."]],
+    heroes: [["Dain", "Guerreiro", "Força inabalável que sustenta a expedição quando cada cristal transforma o terreno e seus guardiões."], ["Nara", "Escriba", "Conhecimento, leitura e memória permitem compreender os ecos antes de tentar purificá-los."], ["Elian", "Mago", "Sente o fluxo mágico dos cristais e reconhece quando a força bruta alimentaria a corrupção."]],
     npcs: [["Crystalix", "Entidade corruptora", "Malícia de origem incerta que distorce os dez ecos da alma do deus-dragão."], ["Rei Midas", "Soberano amaldiçoado", "A tirania avarenta o transforma em prisioneiro de um reino feito de ouro e perda."], ["Guardiões dos ecos", "Adversários", "Cada domínio manifesta uma forma particular da corrupção."]]
   },
   califa: {

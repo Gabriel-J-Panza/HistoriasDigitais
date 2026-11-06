@@ -32,8 +32,8 @@ window.AURELIA_EXPANSIONS = {
   },
   "Os Dez Ecos do Dragão": {
     0: [
-      "A subida para Glacius consumiu mais tempo do que os mapas prometiam. Nevascas apagavam as trilhas em minutos, e Elian precisava aquecer as pedras sem derreter a camada que sustentava o grupo. Lyra registrava direção, vento e duração de cada parada, enquanto Kael seguia adiante preso por uma corda. Quando avistaram as muralhas brancas, já entendiam que o gelo não era apenas cenário: era uma força que punia qualquer decisão apressada.",
-      "Na primeira noite, os três discutiram o significado de purificar em vez de destruir. Kael perguntou por que não quebrariam os cristais antes que Crystalix os usasse novamente. Lyra abriu seus registros e mostrou que cada eco também preservava parte da terra ao redor. Elian concluiu que destruí-los poderia silenciar a corrupção e a própria vida de Glacius. A missão exigiria enfrentar cada domínio sem tratar o poder que o sustentava como inimigo."
+      "A subida para Glacius consumiu mais tempo do que os mapas prometiam. Nevascas apagavam as trilhas em minutos, e Elian precisava aquecer as pedras sem derreter a camada que sustentava o grupo. Nara registrava direção, vento e duração de cada parada, enquanto Dain seguia adiante preso por uma corda. Quando avistaram as muralhas brancas, já entendiam que o gelo não era apenas cenário: era uma força que punia qualquer decisão apressada.",
+      "Na primeira noite, os três discutiram o significado de purificar em vez de destruir. Dain perguntou por que não quebrariam os cristais antes que Crystalix os usasse novamente. Nara abriu seus registros e mostrou que cada eco também preservava parte da terra ao redor. Elian concluiu que destruí-los poderia silenciar a corrupção e a própria vida de Glacius. A missão exigiria enfrentar cada domínio sem tratar o poder que o sustentava como inimigo."
     ]
   },
   "O Trono de Sangue de Califa": {
